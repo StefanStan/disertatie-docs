@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.12)  27 JUN 2017 17:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.12)  28 JUN 2017 14:46
 entering extended mode
 **carte.tex cartevm
 (carte.tex
@@ -797,7 +797,7 @@ Package microtype Info: Loading generic settings for font family
 ("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\uni-1.def"
 File: uni-1.def 2013/05/13 UCS: Unicode data U+0100..U+01FF
 )
-<images/fii.png, id=111, 68.6565pt x 75.4017pt>
+<images/fii.png, id=107, 68.6565pt x 75.4017pt>
 File: images/fii.png Graphic file (type png)
  <use images/fii.png>
 Package pdftex.def Info: images/fii.png used on input line 15.
@@ -909,6 +909,10 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7.69997> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5.5> on input line 3.
+
+LaTeX Font Warning: Font shape `OT1/bch/bc/it' undefined
+(Font)              using `OT1/bch/bc/n' instead on input line 4.
+
 )
 \tf@toc=\write7
 \openout7 = `carte.toc'.
@@ -956,17 +960,56 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [11])
 [12]
 Capitolul 2.
-(chapters/LVM.tex [13
+(chapters/LVM.tex
 
-] [14]
-("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\uni-32.def"
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textcommabelow' on input line 8.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\u' on input line 8.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textcommabelow' on input line 8.
+
+[13
+
+]
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textcommabelow' on input line 18.
+
+[14] ("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\uni-32.def"
 File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
-) [15] [16]) [17]
+)
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textcommabelow' on input line 28.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textcommabelow' on input line 32.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\u' on input line 36.
+
+[15] [16]
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textcommabelow' on input line 44.
+
+) [17]
 Capitolul 3.
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textcommabelow' on input line 139.
+
 (chapters/Arhitectura.tex [18
 
 ]
-<images/LVM.png, id=265, 674.52pt x 990.70125pt>
+<images/LVM.png, id=260, 674.52pt x 990.70125pt>
 File: images/LVM.png Graphic file (type png)
  <use images/LVM.png>
 Package pdftex.def Info: images/LVM.png used on input line 17.
@@ -978,7 +1021,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--3
 
  []
 
-<images/LayeredArchLandscape.png, id=274, 1791.69376pt x 620.3175pt>
+<images/LayeredArchLandscape.png, id=269, 1791.69376pt x 620.3175pt>
 File: images/LayeredArchLandscape.png Graphic file (type png)
 
 <use images/LayeredArchLandscape.png>
@@ -1031,7 +1074,21 @@ Package microtype Info: Loading generic settings for font family
 (_minted-carte/26C13925B8F112760A646A552B61F8E9DCC5A2B5937E68F83D0A910A8572FDF0
 .pygtex) [23]
 (_minted-carte/980F3779EA9A7E25E1CA9C6055F605E390D6325C4FB808E4C217780E854B4DF6
-.pygtex) [24] [25]) [26]
+.pygtex) [24]
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textcommabelow' on input line 100.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\u' on input line 100.
+
+[25]
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textcommabelow' on input line 112.
+
+) [26]
 Capitolul 5.
 
 Package hyperref Warning: Composite letter `\textcedilla+t'
@@ -1064,7 +1121,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 186.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 186.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 186.
 Package rerunfilecheck Info: File `carte.out' has not changed.
-(rerunfilecheck)             Checksum: A8FB04F08C3166AF2C15724402FF44CB;1949.
+(rerunfilecheck)             Checksum: DC390454932D345DAF36AC4A4C9A0B52;1861.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -1075,11 +1132,11 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 17395 strings out of 493323
- 272643 string characters out of 3139060
- 463416 words of memory out of 3000000
- 20416 multiletter control sequences out of 15000+200000
- 24289 words of font info for 117 fonts, out of 3000000 for 9000
+ 17403 strings out of 493323
+ 272755 string characters out of 3139060
+ 464433 words of memory out of 3000000
+ 20422 multiletter control sequences out of 15000+200000
+ 24650 words of font info for 119 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,8n,51p,1029b,713s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc} <C:\Users\StefanS\A
@@ -1087,21 +1144,22 @@ ppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk><C:/Prog
 ram Files/MiKTeX 2.9/fonts/type1/bitstrea/charter/bchr8a.pfb><C:/Program Files/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmbx7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmbxti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.p
-fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Program Files/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmti7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmtt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courier/ucrb8a.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on carte.pdf (30 pages, 593559 bytes).
+/type1/public/amsfonts/cm/cmbx6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/cm/cmbx7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmbxti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmss10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmti7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mtt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courier/ucrb8a.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on carte.pdf (30 pages, 609987 bytes).
 PDF statistics:
- 419 PDF objects out of 1000 (max. 8388607)
- 82 named destinations out of 1000 (max. 500000)
- 26344 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 417 PDF objects out of 1000 (max. 8388607)
+ 81 named destinations out of 1000 (max. 500000)
+ 26848 words of extra memory for PDF output out of 29859 (max. 10000000)
 

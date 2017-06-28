@@ -1,10 +1,10 @@
 \BOOKMARK [0][-]{chapter*.2}{Introducere}{}% 1
 \BOOKMARK [0][-]{chapter*.3}{Contributii}{}% 2
-\BOOKMARK [0][-]{chapter.1}{Point in time recovery}{}% 3
+\BOOKMARK [0][-]{chapter.1}{Studiu point in time recovery}{}% 3
 \BOOKMARK [1][-]{section.1.1}{Setarea arhivarii fisierelor WAL}{chapter.1}% 4
 \BOOKMARK [1][-]{section.1.2}{Crearea unui basebackup}{chapter.1}% 5
 \BOOKMARK [1][-]{section.1.3}{Restabilirea db. folosind Continuous Archive Backup}{chapter.1}% 6
-\BOOKMARK [0][-]{chapter.2}{Logical Volume Manager \(LVM\)}{}% 7
+\BOOKMARK [0][-]{chapter.2}{Studiu Logical Volume Manager \(LVM\)}{}% 7
 \BOOKMARK [1][-]{section.2.1}{Arhitectura LVM}{chapter.2}% 8
 \BOOKMARK [1][-]{section.2.2}{Functionalitati LVM}{chapter.2}% 9
 \BOOKMARK [1][-]{section.2.3}{Crearea Logical Volumes}{chapter.2}% 10
@@ -12,16 +12,15 @@
 \BOOKMARK [2][-]{subsection.2.3.2}{Pasi pentru a crea un Volume Group}{section.2.3}% 12
 \BOOKMARK [2][-]{subsection.2.3.3}{Pasi pentru a crea Logical Volumes}{section.2.3}% 13
 \BOOKMARK [2][-]{subsection.2.3.4}{Modificarea marimii unui Logical Volume}{section.2.3}% 14
-\BOOKMARK [1][-]{section.2.4}{Explicatii despre conventia de numire a LVM}{chapter.2}% 15
-\BOOKMARK [0][-]{chapter.3}{Database Point in time recovery Manager}{}% 16
-\BOOKMARK [1][-]{section.3.1}{Arhitectura sistemului de fisiere}{chapter.3}% 17
-\BOOKMARK [0][-]{chapter.4}{DevOps as a Service}{}% 18
-\BOOKMARK [1][-]{section.4.1}{Arhitectura Sistemului Software}{chapter.4}% 19
-\BOOKMARK [1][-]{section.4.2}{Scripturile UNIX}{chapter.4}% 20
-\BOOKMARK [1][-]{section.4.3}{Server-ul: RESTful API}{chapter.4}% 21
-\BOOKMARK [1][-]{section.4.4}{Interfata grafica cu utilizatorul}{chapter.4}% 22
-\BOOKMARK [1][-]{section.4.5}{Setarea aplicatiei in Amazon Web Services}{chapter.4}% 23
-\BOOKMARK [0][-]{chapter.5}{Ghid de utilizare a aplicatiei}{}% 24
-\BOOKMARK [0][-]{chapter.6}{Directii de dezvoltare viitoare}{}% 25
-\BOOKMARK [0][-]{chapter*.6}{Concluzii}{}% 26
-\BOOKMARK [0][-]{chapter*.7}{Bibliografie}{}% 27
+\BOOKMARK [1][-]{section.2.4}{Conventia de numire a LVM}{chapter.2}% 15
+\BOOKMARK [0][-]{chapter.3}{Arhitectura sistemului de fisiere}{}% 16
+\BOOKMARK [0][-]{chapter.4}{DevOps as a Service}{}% 17
+\BOOKMARK [1][-]{section.4.1}{Arhitectura sistemului software}{chapter.4}% 18
+\BOOKMARK [1][-]{section.4.2}{Scripturile UNIX}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.3}{Server-ul: RESTful API}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.4}{Interfata grafica cu utilizatorul}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.5}{Setarea aplicatiei \356n Amazon Web Services}{chapter.4}% 22
+\BOOKMARK [0][-]{chapter.5}{Ghid de utilizare a aplicatiei}{}% 23
+\BOOKMARK [0][-]{chapter.6}{Directii de dezvoltare viitoare}{}% 24
+\BOOKMARK [0][-]{chapter*.6}{Concluzii}{}% 25
+\BOOKMARK [0][-]{chapter*.7}{Bibliografie}{}% 26
