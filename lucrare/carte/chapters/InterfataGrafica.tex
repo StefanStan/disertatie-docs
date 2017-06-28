@@ -1,0 +1,75 @@
+Interfaţa grafică din cadrul aplicaţiei \textit{„Security Protocols Checker"} a fost realizată folosind tehnologia \textit{JavaFx}\footnote{\textit{JavaFx}, distribuit de către \textit{Oracle} în pachetul standard al \textit{Java}, de la versiunea \textit{1.8} - \url{http://docs.oracle.com/javafx/}}. Aceasta este formată atât din elemente grafice create la runtime, instanțiind anumite clase și apelând metodele corespunzătoare, cât și din ferestre statice realizate în design mode folosind utilitarul SceneBuilder\footnote{SceneBuilder, utilitar oferit de Oracle sub licența Oracle BSD \url{http://www.oracle.com/technetwork/java/javase/downloads/javafxscenebuilder-info-2157684.html}} ce crează fișiere cu extensia \texttt{.fxml}. Toate acestea se găsesc în cadrul pachetului \texttt{SecurityProtocolsChecker.GUI}, a cărui componenţă este descrisă în \textit{Figura \ref{fig:diagPacheteGUI}}.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.7]{pacheteInterfata}
+    \caption{Diagrama pachetelor ce compun interfața grafică}
+    \label{fig:diagPacheteGUI}
+\end{figure}
+\par
+În continuare, se vor prezenta componentele principale ale interfeței grafice, împreună cu clasele ce le descriu, precum și modulele răspunzătoare cu descrierea fișierelor de configurare și cu colorarea sintactică.
+\newpage
+\section{Editorul de specificații}
+Elementul principal al interfeței grafice, fiind, de fapt, unul din componentele de bază al oricărui \textit{IDE} (mediu de dezvoltare), este editorul de specificații. Dintre funcționalitățile sale putem aminti: crearea şi deschiderea unui număr variabil de fișire de specificație, precum și modificarea, salvarea şi verificarea corectitudinii lor sintactice şi semantice.
+\par
+\begin{wrapfigure}{r}{0.5\textwidth}
+	\centering
+	\includegraphics[scale=0.7]{editorSpec}
+    \caption{Editorul de specificaţii}
+    \label{fig:editorSpec}
+\end{wrapfigure}
+La nivel atomic, editorul este format dintr-un număr variabil de tab-uri, ce se obțin din instanțe ale clasei \texttt{MyTab}, intrând în alcătuirea unui container (\texttt{TabPane}), definit alături de celelalte componente statice ale interfeței în fișierul \texttt{mainWindow.fxml}. Clasa \texttt{MyTab} extinde clasa \texttt{Tab} din pachetul \texttt{javafx.scene.control} și agregă două obiecte din clasele \texttt{MyCodeArea} și \texttt{TextArea}, semnificând cele două porțiuni unde se scrie codul sursă și respectiv unde se primește rezultatul verificărilor sintactice și semantice. Clasa \texttt{MyCodeArea} este un wrapper peste un obiect de tip \texttt{CodeArea}, din libraria open source \textit{RichTextFX}\footnote{RichTextFX, librarie open source distrbuită de Tomas Mikula \url{https://github.com/TomasMikula/RichTextFX}}.
+\par
+În \textit{Figura \ref{fig:editorSpec}} se pot observa cele două componente ale tab-ului, instanțe ale claselor \texttt{MyCodeArea} și \texttt{TextArea}, separate de un obiect din clasa \texttt{SplitPane}. În exemplul din figură este încărcată specificația unui protocol de securitate, care a fost analizat din punct de vedere sintactic și semantic. De asemenea, componenta de introducere a codului sursă are inclusă o bară de numerotare a liniilor, aceasta fiind de ajutor atunci când validarea sintactică eșuază, deoarece se indică la ce linie sunt probleme.
+\newpage
+\section{Panoul de control}
+Un alt element important al interfeței grafice cu utilizatorul este \textit{panoul de control}. Scopul acestuia este de a oferi o organizare a butoanelor ce permit interacționarea cu diferitele funcționalități ale aplicației.
+\par
+Din punct de vedere structural, panoul de control este divizat în trei părți ce separă butoanele cu care utilizatorul poate interacționa după funcționalitățile pe care le oferă. Cele trei secțiuni, precum și elementele din interiorul acestora au fost aliniate folosind instanțe ale claselor \texttt{VBox} și \texttt{HBox} din pachetul \texttt{javafx.scene.layout}. Elementele componente ale secțiunilor panoului de control vor fi prezentate în cele ce urmează:
+\begin{wrapfigure}{r}{0.3\textwidth}
+	\centering
+	\includegraphics[scale=0.7]{panouCtrl}
+    \caption{Panoul de control}
+    \label{fig:panouControl}
+\end{wrapfigure}
+\begin{itemize}
+\item butoane folosite pentru interacționarea cu sistemul de fișiere (fișier nou, deschidere fișier, salvare fișier);
+\item o imagine cu două stări (\textit{„X”} roșu și bifă verde) ce se modifică dinamic, indicând dacă protocolul a fost sau nu încărcat cu succes pentru a fi rulat, precum și două butoane, pentru încărcarea și rularea protocolului;
+\item butoane folosite pentru a genera un \texttt{.pdf} și respectiv codul latex necesar acestuia, pornind de la specificația protocolului încărcat (cele din stânga) sau pornind de la rezultatul verificării protocolului (cele din dreapta).
+\end{itemize}
+\section{Fişierele de configurare}
+În aplicația \textit{„Security Protocols Checker”} au fost utilizate două tipuri de fișiere (\texttt{.properties}\footnote{Extensia .properties - \url{https://docs.oracle.com/javase/tutorial/essential/environment/properties.html}} și .css\footnote{Extensia \texttt{.css} - \url{http://www.w3schools.com/css/css_howto.asp}}) pentru a încărca date ce pot fi personalizate de utilizator. Ele sunt utilizate de clasa \texttt{ConfigurationAssistant} și descriu urmatoarele:
+\begin{itemize}
+\item \textit{labels.properties} are o structură de tip cheie-valoare și reține numele meniurilor și etichetelor ce apar în cadrul aplicației;
+\item \textit{colors.css} se folosește pentru a încărca culorile diverselor elemente din cadrul gramaticii ce descrie limbajul fișierelor de specificație.
+\end{itemize}
+\newpage
+\section{Colorarea sintactică}
+Modulul de colorare sintactică a fost creat cu scopul de a îmbunătăți interacțiunea utilizatorului cu aplicația. Acesta poate înțelege acum mai ușor fișierul de specificație al unui protocol, unde termeni distincți(chei, agenți etc.) sunt colorați diferit.
+\par
+Metoda prezentată \textit{Codul sursă \ref{cod:computeHighlighting1}} este responsabilă cu colorarea sintactică a specificației. Dacă fișierul de configurare \textit{colors.css} este prezent și este scris corect, atunci acesta se interpretează, culorile fiind citite de acolo. Altfel, este încărcată o schemă de culori implicită. Fișierul este foarte ușor de editat de către utilizator, care îl primește odată cu aplicația, într-un format implicit, iar tot ce trebuie să facă este să modifice culorile pentru anumite clase \textit{css} predefinite în fișier (cu nume ușor de înțeles: \texttt{keys}, \texttt{agents} etc.). Culorile pot fi introduse în plain text (\texttt{red}, \texttt{green}, \texttt{blue} etc.), sau în cod hexadecimal (\texttt{$\#$0000FF}). Metoda \texttt{computeHighlighting()} primește textul ce trebuie colorat sintactic și folosește clasele \texttt{Pattern} și \texttt{Matcher} pentru a îl împărți în token-uri (utilizând expresiile regulate pentru fiecare tip de element: cheie, agent etc.). Apoi le asignează câte o clasă din fișierul cu extensia \texttt{.css}. Apelul metodei este înregistrat la modificări asupra textului din \texttt{codeArea}, precum este prezentat în \textit{Codul sursă \ref{cod:computeHighlighting2}}.
+%\textit{Codul sursă \ref{cod:replaceTerm}}
+\begin{listing}[ht]
+\inputminted[
+frame=lines,
+framesep=2mm,
+baselinestretch=0.9,
+fontsize=\footnotesize,
+fontfamily=courier,
+linenos
+]{Java}{sourceCode/colorareSin1.java}
+\caption{Metoda de colorare \texttt{computeHighlighting()}}
+\label{cod:computeHighlighting1} 
+\end{listing}
+\\
+\begin{listing}[ht]
+\inputminted[
+frame=lines,
+framesep=2mm,
+baselinestretch=0.9,
+fontsize=\footnotesize,
+fontfamily=courier,
+linenos
+]{Java}{sourceCode/colorareSin2.java}
+\caption{Inregistrarea metodei de colorare}
+\label{cod:computeHighlighting2} 
+\end{listing}

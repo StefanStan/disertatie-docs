@@ -1,0 +1,33 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYGcolorful{k+kd}{private} \PYGcolorful{k+kt}{boolean} \PYGcolorful{n+nf}{isProtocolSafe}\PYGcolorful{o}{(}\PYGcolorful{n}{String} \PYGcolorful{n}{protocolDesc}\PYGcolorful{o}{)} \PYGcolorful{o}{\PYGcolorfulZob{}}
+
+        \PYGcolorful{c+c1}{//  pașii preliminari algortmului de rulare}
+	\PYGcolorful{n}{Intruder} \PYGcolorful{n}{intruder} \PYGcolorful{o}{=} \PYGcolorful{n}{Intruder}\PYGcolorful{o}{.}\PYGcolorful{n+na}{getInstance}\PYGcolorful{o}{();}
+
+        \PYGcolorful{n}{intruder}\PYGcolorful{o}{.}\PYGcolorful{n+na}{clearEveryInfo}\PYGcolorful{o}{();}
+        
+        \PYGcolorful{n}{intruder}\PYGcolorful{o}{.}\PYGcolorful{n+na}{dontUseMasterProtocol}\PYGcolorful{o}{();}
+        \PYGcolorful{n}{Protocol} \PYGcolorful{n}{masterProtocol} \PYGcolorful{o}{=} \PYGcolorful{n}{Protocol}\PYGcolorful{o}{.}\PYGcolorful{n+na}{loadProtocol}\PYGcolorful{o}{(}\PYGcolorful{n}{protocolDesc}\PYGcolorful{o}{,} \PYGcolorful{k+kc}{null}\PYGcolorful{o}{);}
+
+        \PYGcolorful{n}{intruder}\PYGcolorful{o}{.}\PYGcolorful{n+na}{useMasterProtocol}\PYGcolorful{o}{();}
+        \PYGcolorful{n}{masterProtocol}\PYGcolorful{o}{.}\PYGcolorful{n+na}{run}\PYGcolorful{o}{();}
+        
+        \PYGcolorful{n}{intruder}\PYGcolorful{o}{.}\PYGcolorful{n+na}{dontUseMasterProtocol}\PYGcolorful{o}{();}
+        \PYGcolorful{n}{Protocol} \PYGcolorful{n}{myProtocol} \PYGcolorful{o}{=} \PYGcolorful{n}{Protocol}\PYGcolorful{o}{.}\PYGcolorful{n+na}{loadProtocol}\PYGcolorful{o}{(}\PYGcolorful{n}{protocolDesc}\PYGcolorful{o}{,} \PYGcolorful{k+kc}{null}\PYGcolorful{o}{);}
+
+
+	\PYGcolorful{c+c1}{//  rularea efectivă a instanței de protocol}
+        \PYGcolorful{n}{myProtocol}\PYGcolorful{o}{.}\PYGcolorful{n+na}{run}\PYGcolorful{o}{(}\PYGcolorful{l+m+mi}{1}\PYGcolorful{o}{);}
+        \PYGcolorful{k}{if}\PYGcolorful{o}{(}\PYGcolorful{n}{myProtocol}\PYGcolorful{o}{.}\PYGcolorful{n+na}{getLog}\PYGcolorful{o}{().}\PYGcolorful{n+na}{isCorrect}\PYGcolorful{o}{())\PYGcolorfulZob{}}
+
+            \PYGcolorful{n}{myProtocol}\PYGcolorful{o}{.}\PYGcolorful{n+na}{reset}\PYGcolorful{o}{();}
+            \PYGcolorful{n}{myProtocol}\PYGcolorful{o}{.}\PYGcolorful{n+na}{run}\PYGcolorful{o}{(}\PYGcolorful{l+m+mi}{2}\PYGcolorful{o}{);}
+            \PYGcolorful{k}{if} \PYGcolorful{o}{(}\PYGcolorful{n}{myProtocol}\PYGcolorful{o}{.}\PYGcolorful{n+na}{getLog}\PYGcolorful{o}{().}\PYGcolorful{n+na}{isCorrect}\PYGcolorful{o}{())\PYGcolorfulZob{}}
+
+                \PYGcolorful{k}{return} \PYGcolorful{k+kc}{true}\PYGcolorful{o}{;}
+            \PYGcolorful{o}{\PYGcolorfulZcb{}}
+        \PYGcolorful{o}{\PYGcolorfulZcb{}}
+
+        \PYGcolorful{k}{return} \PYGcolorful{k+kc}{false}\PYGcolorful{o}{;}
+    \PYGcolorful{o}{\PYGcolorfulZcb{}}
+\end{Verbatim}

@@ -1,0 +1,64 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGcolorful{k+kd}{public} \PYGcolorful{n}{ArrayList}\PYGcolorful{o}{\PYGcolorfulZlt{}}\PYGcolorful{n}{Term}\PYGcolorful{o}{\PYGcolorfulZgt{}} \PYGcolorful{n+nf}{replaceMessage}\PYGcolorful{o}{(}\PYGcolorful{n}{Protocol} \PYGcolorful{n}{protocol}\PYGcolorful{o}{,} \PYGcolorful{n}{Term} \PYGcolorful{n}{message}\PYGcolorful{o}{,} \PYGcolorful{n}{Agent} \PYGcolorful{n}{to}\PYGcolorful{o}{,} \PYGcolorful{n}{Agent} \PYGcolorful{n}{from}\PYGcolorful{o}{)\PYGcolorfulZob{}}
+
+    \PYGcolorful{n}{ArrayList}\PYGcolorful{o}{\PYGcolorfulZlt{}}\PYGcolorful{n}{Term}\PYGcolorful{o}{\PYGcolorfulZgt{}} \PYGcolorful{n}{possibleChoices} \PYGcolorful{o}{=} \PYGcolorful{k}{new} \PYGcolorful{n}{ArrayList}\PYGcolorful{o}{\PYGcolorfulZlt{}\PYGcolorfulZgt{}();}
+    \PYGcolorful{k}{if}\PYGcolorful{o}{(}\PYGcolorful{n}{message} \PYGcolorful{k}{instanceof} \PYGcolorful{n}{Agent}\PYGcolorful{o}{)\PYGcolorfulZob{}}
+
+        \PYGcolorful{n}{possibleChoices}\PYGcolorful{o}{.}\PYGcolorful{n+na}{addAll}\PYGcolorful{o}{(}\PYGcolorful{n}{replaceTerm}\PYGcolorful{o}{(}\PYGcolorful{n}{protocol}\PYGcolorful{o}{,} \PYGcolorful{o}{(}\PYGcolorful{n}{Agent}\PYGcolorful{o}{)} \PYGcolorful{n}{message}\PYGcolorful{o}{));}
+        \PYGcolorful{k}{return} \PYGcolorful{n}{possibleChoices}\PYGcolorful{o}{;}
+    \PYGcolorful{o}{\PYGcolorfulZcb{}}
+    \PYGcolorful{k}{if}\PYGcolorful{o}{(}\PYGcolorful{n}{message} \PYGcolorful{k}{instanceof} \PYGcolorful{n}{Key}\PYGcolorful{o}{)\PYGcolorfulZob{}}
+
+        \PYGcolorful{n}{possibleChoices}\PYGcolorful{o}{.}\PYGcolorful{n+na}{addAll}\PYGcolorful{o}{(}\PYGcolorful{n}{replaceTerm}\PYGcolorful{o}{(}\PYGcolorful{n}{protocol}\PYGcolorful{o}{,} \PYGcolorful{o}{(}\PYGcolorful{n}{Key}\PYGcolorful{o}{)} \PYGcolorful{n}{message}\PYGcolorful{o}{));}
+        \PYGcolorful{k}{return} \PYGcolorful{n}{possibleChoices}\PYGcolorful{o}{;}
+    \PYGcolorful{o}{\PYGcolorfulZcb{}}
+    \PYGcolorful{k}{if}\PYGcolorful{o}{(}\PYGcolorful{n}{message} \PYGcolorful{k}{instanceof} \PYGcolorful{n}{BasicTerm}\PYGcolorful{o}{)\PYGcolorfulZob{}}
+
+        \PYGcolorful{n}{possibleChoices}\PYGcolorful{o}{.}\PYGcolorful{n+na}{addAll}\PYGcolorful{o}{(}\PYGcolorful{n}{replaceTerm}\PYGcolorful{o}{(}\PYGcolorful{n}{protocol}\PYGcolorful{o}{,} \PYGcolorful{o}{(}\PYGcolorful{n}{BasicTerm}\PYGcolorful{o}{)} \PYGcolorful{n}{message}\PYGcolorful{o}{));}
+        \PYGcolorful{k}{return} \PYGcolorful{n}{possibleChoices}\PYGcolorful{o}{;}
+    \PYGcolorful{o}{\PYGcolorfulZcb{}}
+    \PYGcolorful{k}{if}\PYGcolorful{o}{(}\PYGcolorful{n}{message} \PYGcolorful{k}{instanceof} \PYGcolorful{n}{Nonce}\PYGcolorful{o}{)\PYGcolorfulZob{}}
+
+        \PYGcolorful{n}{possibleChoices}\PYGcolorful{o}{.}\PYGcolorful{n+na}{addAll}\PYGcolorful{o}{(}\PYGcolorful{n}{replaceTerm}\PYGcolorful{o}{(}\PYGcolorful{n}{protocol}\PYGcolorful{o}{,} \PYGcolorful{o}{(}\PYGcolorful{n}{Nonce}\PYGcolorful{o}{)} \PYGcolorful{n}{message}\PYGcolorful{o}{));}
+        \PYGcolorful{k}{return} \PYGcolorful{n}{possibleChoices}\PYGcolorful{o}{;}
+    \PYGcolorful{o}{\PYGcolorfulZcb{}}
+    \PYGcolorful{k}{if}\PYGcolorful{o}{(}\PYGcolorful{n}{message} \PYGcolorful{k}{instanceof} \PYGcolorful{n}{CompoundTerm}\PYGcolorful{o}{)\PYGcolorfulZob{}}
+
+        \PYGcolorful{n}{possibleChoices}\PYGcolorful{o}{.}\PYGcolorful{n+na}{addAll}\PYGcolorful{o}{(}\PYGcolorful{n}{replaceTerm}\PYGcolorful{o}{(}\PYGcolorful{n}{protocol}\PYGcolorful{o}{,} \PYGcolorful{o}{(}\PYGcolorful{n}{CompoundTerm}\PYGcolorful{o}{)} \PYGcolorful{n}{message}\PYGcolorful{o}{,} \PYGcolorful{n}{to}\PYGcolorful{o}{,} \PYGcolorful{n}{from}\PYGcolorful{o}{));}
+        \PYGcolorful{k}{return} \PYGcolorful{n}{possibleChoices}\PYGcolorful{o}{;}
+
+    \PYGcolorful{o}{\PYGcolorfulZcb{}}
+    \PYGcolorful{k}{if}\PYGcolorful{o}{(}\PYGcolorful{n}{message} \PYGcolorful{k}{instanceof} \PYGcolorful{n}{EncryptedTerm}\PYGcolorful{o}{)} \PYGcolorful{o}{\PYGcolorfulZob{}}
+
+        \PYGcolorful{n}{possibleChoices}\PYGcolorful{o}{.}\PYGcolorful{n+na}{addAll}\PYGcolorful{o}{(}\PYGcolorful{n}{replaceTerm}\PYGcolorful{o}{(}\PYGcolorful{n}{protocol}\PYGcolorful{o}{,} \PYGcolorful{o}{(}\PYGcolorful{n}{EncryptedTerm}\PYGcolorful{o}{)} \PYGcolorful{n}{message}\PYGcolorful{o}{,} \PYGcolorful{n}{to}\PYGcolorful{o}{,} \PYGcolorful{n}{from}\PYGcolorful{o}{));}
+        \PYGcolorful{k}{return} \PYGcolorful{n}{possibleChoices}\PYGcolorful{o}{;}
+    \PYGcolorful{o}{\PYGcolorfulZcb{}}
+    \PYGcolorful{k}{return} \PYGcolorful{n}{possibleChoices}\PYGcolorful{o}{;}
+\PYGcolorful{o}{\PYGcolorfulZcb{}}
+
+\PYGcolorful{k+kd}{private} \PYGcolorful{n}{ArrayList}\PYGcolorful{o}{\PYGcolorfulZlt{}}\PYGcolorful{n}{Term}\PYGcolorful{o}{\PYGcolorfulZgt{}} \PYGcolorful{n+nf}{replaceTerm}\PYGcolorful{o}{(}\PYGcolorful{n}{Protocol} \PYGcolorful{n}{prot}\PYGcolorful{o}{,} \PYGcolorful{n}{Agent} \PYGcolorful{n}{message}\PYGcolorful{o}{);}
+\PYGcolorful{k+kd}{private} \PYGcolorful{n}{ArrayList}\PYGcolorful{o}{\PYGcolorfulZlt{}}\PYGcolorful{n}{Term}\PYGcolorful{o}{\PYGcolorfulZgt{}} \PYGcolorful{n+nf}{replaceTerm}\PYGcolorful{o}{(}\PYGcolorful{n}{Protocol} \PYGcolorful{n}{prot}\PYGcolorful{o}{,} \PYGcolorful{n}{Key} \PYGcolorful{n}{message}\PYGcolorful{o}{);}
+\PYGcolorful{k+kd}{private} \PYGcolorful{n}{ArrayList}\PYGcolorful{o}{\PYGcolorfulZlt{}}\PYGcolorful{n}{Term}\PYGcolorful{o}{\PYGcolorfulZgt{}} \PYGcolorful{n+nf}{replaceTerm}\PYGcolorful{o}{(}\PYGcolorful{n}{Protocol} \PYGcolorful{n}{prot}\PYGcolorful{o}{,} \PYGcolorful{n}{BasicTerm} \PYGcolorful{n}{message}\PYGcolorful{o}{);}
+\PYGcolorful{k+kd}{private} \PYGcolorful{n}{ArrayList}\PYGcolorful{o}{\PYGcolorfulZlt{}}\PYGcolorful{n}{Term}\PYGcolorful{o}{\PYGcolorfulZgt{}} \PYGcolorful{n+nf}{replaceTerm}\PYGcolorful{o}{(}\PYGcolorful{n}{Protocol} \PYGcolorful{n}{prot}\PYGcolorful{o}{,} \PYGcolorful{n}{Nonce} \PYGcolorful{n}{message}\PYGcolorful{o}{);}
+\PYGcolorful{k+kd}{private} \PYGcolorful{n}{ArrayList}\PYGcolorful{o}{\PYGcolorfulZlt{}}\PYGcolorful{n}{Term}\PYGcolorful{o}{\PYGcolorfulZgt{}} \PYGcolorful{n+nf}{replaceTerm}\PYGcolorful{o}{(}\PYGcolorful{n}{Protocol} \PYGcolorful{n}{prot}\PYGcolorful{o}{,} \PYGcolorful{n}{CompoundTerm} \PYGcolorful{n}{message}\PYGcolorful{o}{,} \PYGcolorful{n}{Agent} \PYGcolorful{n}{to}\PYGcolorful{o}{,} \PYGcolorful{n}{Agent} \PYGcolorful{n}{from}\PYGcolorful{o}{);}
+\PYGcolorful{k+kd}{private} \PYGcolorful{n}{ArrayList}\PYGcolorful{o}{\PYGcolorfulZlt{}}\PYGcolorful{n}{Term}\PYGcolorful{o}{\PYGcolorfulZgt{}} \PYGcolorful{n+nf}{replaceTerm}\PYGcolorful{o}{(}\PYGcolorful{n}{Protocol} \PYGcolorful{n}{prot}\PYGcolorful{o}{,} \PYGcolorful{n}{EncryptedTerm} \PYGcolorful{n}{message}\PYGcolorful{o}{,} \PYGcolorful{n}{Agent} \PYGcolorful{n}{to}\PYGcolorful{o}{,} \PYGcolorful{n}{Agent} \PYGcolorful{n}{from}\PYGcolorful{o}{);}
+
+\PYGcolorful{k+kd}{private} \PYGcolorful{n}{ArrayList}\PYGcolorful{o}{\PYGcolorfulZlt{}}\PYGcolorful{n}{Term}\PYGcolorful{o}{\PYGcolorfulZgt{}} \PYGcolorful{n+nf}{replaceTerm}\PYGcolorful{o}{(}\PYGcolorful{n}{Protocol} \PYGcolorful{n}{prot}\PYGcolorful{o}{,} \PYGcolorful{n}{Nonce} \PYGcolorful{n}{message}\PYGcolorful{o}{)\PYGcolorfulZob{}}
+
+    \PYGcolorful{n}{ArrayList}\PYGcolorful{o}{\PYGcolorfulZlt{}}\PYGcolorful{n}{Term}\PYGcolorful{o}{\PYGcolorfulZgt{}} \PYGcolorful{n}{result} \PYGcolorful{o}{=} \PYGcolorful{k}{new} \PYGcolorful{n}{ArrayList}\PYGcolorful{o}{\PYGcolorfulZlt{}\PYGcolorfulZgt{}();}
+
+    \PYGcolorful{n}{Nonce} \PYGcolorful{n}{generated} \PYGcolorful{o}{=} \PYGcolorful{k}{new} \PYGcolorful{n}{Nonce}\PYGcolorful{o}{(}\PYGcolorful{n}{message}\PYGcolorful{o}{.}\PYGcolorful{n+na}{getAgent}\PYGcolorful{o}{(),} \PYGcolorful{n}{message}\PYGcolorful{o}{.}\PYGcolorful{n+na}{getNr}\PYGcolorful{o}{(),} \PYGcolorful{n}{message}\PYGcolorful{o}{.}\PYGcolorful{n+na}{getProtocol}\PYGcolorful{o}{());}
+    \PYGcolorful{n}{generated}\PYGcolorful{o}{.}\PYGcolorful{n+na}{setIntruderGenerated}\PYGcolorful{o}{(}\PYGcolorful{k+kc}{true}\PYGcolorful{o}{);}
+    \PYGcolorful{n}{result}\PYGcolorful{o}{.}\PYGcolorful{n+na}{add}\PYGcolorful{o}{(}\PYGcolorful{n}{generated}\PYGcolorful{o}{);}
+
+    \PYGcolorful{k}{for}\PYGcolorful{o}{(}\PYGcolorful{n}{Term} \PYGcolorful{n}{auxTerm} \PYGcolorful{o}{:} \PYGcolorful{n}{getMassiveKnowledge}\PYGcolorful{o}{(}\PYGcolorful{n}{prot}\PYGcolorful{o}{))\PYGcolorfulZob{}}
+
+        \PYGcolorful{k}{if}\PYGcolorful{o}{(!}\PYGcolorful{n}{message}\PYGcolorful{o}{.}\PYGcolorful{n+na}{equals}\PYGcolorful{o}{(}\PYGcolorful{n}{auxTerm}\PYGcolorful{o}{)} \PYGcolorful{o}{\PYGcolorfulZam{}\PYGcolorfulZam{}} \PYGcolorful{n}{message}\PYGcolorful{o}{.}\PYGcolorful{n+na}{theSame}\PYGcolorful{o}{(}\PYGcolorful{n}{auxTerm}\PYGcolorful{o}{))\PYGcolorfulZob{}}
+
+            \PYGcolorful{n}{result}\PYGcolorful{o}{.}\PYGcolorful{n+na}{add}\PYGcolorful{o}{(}\PYGcolorful{n}{auxTerm}\PYGcolorful{o}{);}
+            \PYGcolorful{k}{break}\PYGcolorful{o}{;}
+        \PYGcolorful{o}{\PYGcolorfulZcb{}}
+    \PYGcolorful{o}{\PYGcolorfulZcb{}}
+    \PYGcolorful{k}{return} \PYGcolorful{n}{result}\PYGcolorful{o}{;}
+\PYGcolorful{o}{\PYGcolorfulZcb{}}
+\end{Verbatim}

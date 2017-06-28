@@ -1,0 +1,16 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {danish}
+\beamer@sectionintoc {1}{Introducere}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Cuvinte cheie}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Obiective}{4}{0}{1}
+\beamer@subsectionintoc {1}{3}{Aplica\IeC {{\textcommabelow t}}ii similare}{5}{0}{1}
+\beamer@sectionintoc {2}{Modelare Teoretic\IeC {\u a}}{6}{0}{2}
+\beamer@subsectionintoc {2}{1}{Sursa de inspira\IeC {{\textcommabelow t}}ie}{6}{0}{2}
+\beamer@subsectionintoc {2}{2}{Protocoale de securitate}{7}{0}{2}
+\beamer@sectionintoc {3}{Implementare}{8}{0}{3}
+\beamer@subsectionintoc {3}{1}{Arhitectura aplica\IeC {{\textcommabelow t}}iei}{8}{0}{3}
+\beamer@subsectionintoc {3}{2}{Descrierea unui protocol}{9}{0}{3}
+\beamer@sectionintoc {4}{Exemplu de rulare}{10}{0}{4}
+\beamer@subsectionintoc {4}{1}{Rulare - Security Protocols Checker}{11}{0}{4}
+\beamer@subsectionintoc {4}{2}{Rulare - Scyther}{13}{0}{4}
+\beamer@sectionintoc {5}{Concluzii}{15}{0}{5}

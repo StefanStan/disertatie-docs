@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{k+kd}{private} \PYG{k+kd}{static} \PYG{n}{StyleSpans}\PYG{o}{\PYGZlt{}}\PYG{n}{Collection}\PYG{o}{\PYGZlt{}}\PYG{n}{String}\PYG{o}{\PYGZgt{}\PYGZgt{}} \PYG{n+nf}{computeHighlighting}\PYG{o}{(}\PYG{n}{String} \PYG{n}{text}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+        
+        \PYG{n}{Matcher} \PYG{n}{matcher} \PYG{o}{=} \PYG{n}{PATTERN}\PYG{o}{.}\PYG{n+na}{matcher}\PYG{o}{(}\PYG{n}{text}\PYG{o}{);}
+        \PYG{k+kt}{int} \PYG{n}{lastKwEnd} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{o}{;}
+        \PYG{n}{StyleSpansBuilder}\PYG{o}{\PYGZlt{}}\PYG{n}{Collection}\PYG{o}{\PYGZlt{}}\PYG{n}{String}\PYG{o}{\PYGZgt{}\PYGZgt{}} \PYG{n}{spansBuilder}
+                \PYG{o}{=} \PYG{k}{new} \PYG{n}{StyleSpansBuilder}\PYG{o}{\PYGZlt{}\PYGZgt{}();}
+        \PYG{k}{while}\PYG{o}{(}\PYG{n}{matcher}\PYG{o}{.}\PYG{n+na}{find}\PYG{o}{())} \PYG{o}{\PYGZob{}}
+            \PYG{c+c1}{//	asignam o clasa din fisierul css in fct de exp regulata }
+            \PYG{n}{String} \PYG{n}{styleClass} \PYG{o}{=}
+                    \PYG{n}{matcher}\PYG{o}{.}\PYG{n+na}{group}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}KEYS\PYGZdq{}}\PYG{o}{)} \PYG{o}{!=} \PYG{k+kc}{null} \PYG{o}{?} \PYG{l+s}{\PYGZdq{}keys\PYGZdq{}} \PYG{o}{:}
+                    \PYG{n}{matcher}\PYG{o}{.}\PYG{n+na}{group}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}BASICTERMS\PYGZdq{}}\PYG{o}{)} \PYG{o}{!=} \PYG{k+kc}{null} \PYG{o}{?} \PYG{l+s}{\PYGZdq{}basicTerms\PYGZdq{}} \PYG{o}{:}
+                    \PYG{n}{matcher}\PYG{o}{.}\PYG{n+na}{group}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}NONCES\PYGZdq{}}\PYG{o}{)} \PYG{o}{!=} \PYG{k+kc}{null} \PYG{o}{?} \PYG{l+s}{\PYGZdq{}nonces\PYGZdq{}} \PYG{o}{:}
+                    \PYG{n}{matcher}\PYG{o}{.}\PYG{n+na}{group}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}AGENTS\PYGZdq{}}\PYG{o}{)} \PYG{o}{!=} \PYG{k+kc}{null} \PYG{o}{?} \PYG{l+s}{\PYGZdq{}agents\PYGZdq{}} \PYG{o}{:}
+                    \PYG{n}{matcher}\PYG{o}{.}\PYG{n+na}{group}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}BRACES\PYGZdq{}}\PYG{o}{)} \PYG{o}{!=} \PYG{k+kc}{null} \PYG{o}{?} \PYG{l+s}{\PYGZdq{}braces\PYGZdq{}} \PYG{o}{:}
+                    \PYG{n}{matcher}\PYG{o}{.}\PYG{n+na}{group}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}PARAN\PYGZdq{}}\PYG{o}{)} \PYG{o}{!=} \PYG{k+kc}{null} \PYG{o}{?} \PYG{l+s}{\PYGZdq{}paran\PYGZdq{}} \PYG{o}{:}
+                    \PYG{k+kc}{null}\PYG{o}{;} \PYG{c+cm}{/* never happens */} \PYG{k}{assert} \PYG{n}{styleClass} \PYG{o}{!=} \PYG{k+kc}{null}\PYG{o}{;}
+            \PYG{n}{spansBuilder}\PYG{o}{.}\PYG{n+na}{add}\PYG{o}{(}\PYG{n}{Collections}\PYG{o}{.}\PYG{n+na}{emptyList}\PYG{o}{(),} \PYG{n}{matcher}\PYG{o}{.}\PYG{n+na}{start}\PYG{o}{()} \PYG{o}{\PYGZhy{}} \PYG{n}{lastKwEnd}\PYG{o}{);}
+            \PYG{n}{spansBuilder}\PYG{o}{.}\PYG{n+na}{add}\PYG{o}{(}\PYG{n}{Collections}\PYG{o}{.}\PYG{n+na}{singleton}\PYG{o}{(}\PYG{n}{styleClass}\PYG{o}{),} \PYG{n}{matcher}\PYG{o}{.}\PYG{n+na}{end}\PYG{o}{()} \PYG{o}{\PYGZhy{}} \PYG{n}{matcher}\PYG{o}{.}\PYG{n+na}{start}\PYG{o}{());}
+            \PYG{n}{lastKwEnd} \PYG{o}{=} \PYG{n}{matcher}\PYG{o}{.}\PYG{n+na}{end}\PYG{o}{();}
+        \PYG{o}{\PYGZcb{}}
+        \PYG{n}{spansBuilder}\PYG{o}{.}\PYG{n+na}{add}\PYG{o}{(}\PYG{n}{Collections}\PYG{o}{.}\PYG{n+na}{emptyList}\PYG{o}{(),} \PYG{n}{text}\PYG{o}{.}\PYG{n+na}{length}\PYG{o}{()} \PYG{o}{\PYGZhy{}} \PYG{n}{lastKwEnd}\PYG{o}{);}
+        \PYG{k}{return} \PYG{n}{spansBuilder}\PYG{o}{.}\PYG{n+na}{create}\PYG{o}{();}
+    \PYG{o}{\PYGZcb{}}
+\end{Verbatim}

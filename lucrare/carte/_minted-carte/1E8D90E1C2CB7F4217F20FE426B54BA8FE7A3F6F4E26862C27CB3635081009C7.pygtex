@@ -1,0 +1,36 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+ch}{\PYGZsh{}!/bin/bash}
+
+\PYG{k}{if} \PYG{o}{[} \PYG{l+s+s2}{\PYGZdq{}}\PYG{n+nv}{\PYGZdl{}\PYGZsh{}}\PYG{l+s+s2}{\PYGZdq{}} \PYGZhy{}ne \PYG{l+m}{2} \PYG{o}{]}
+\PYG{k}{then}
+        \PYG{n+nb}{echo} \PYG{l+s+s2}{\PYGZdq{}Illegal number of parameters. 2 params: ip port\PYGZdq{}}
+        \PYG{n+nb}{exit} \PYG{l+m}{1}
+\PYG{k}{fi}
+
+\PYG{n+nv}{name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{k}{\PYGZdl{}(}basename \PYG{n+nv}{\PYGZdl{}0}\PYG{k}{)}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n+nv}{pgdata}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{k}{\PYGZdl{}(}find /pgdata \PYGZhy{}type d \PYGZhy{}name \PYG{n+nv}{\PYGZdl{}name}\PYG{k}{)}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{k}{if} \PYG{o}{[} \PYG{l+s+si}{\PYGZdl{}\PYGZob{}\PYGZsh{}}\PYG{n+nv}{pgdata}\PYG{l+s+si}{\PYGZcb{}} \PYG{o}{==} \PYG{l+m}{0} \PYG{o}{]}
+\PYG{k}{then}
+        \PYG{n+nb}{echo} \PYG{l+s+s2}{\PYGZdq{}tenant with name }\PYG{n+nv}{\PYGZdl{}name}\PYG{l+s+s2}{ has no pgdata folder\PYGZdq{}}
+        \PYG{n+nb}{exit} \PYG{l+m}{2}
+\PYG{k}{fi}
+
+\PYG{n+nv}{backup}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{k}{\PYGZdl{}(}find /backup \PYGZhy{}type d \PYGZhy{}name \PYG{n+nv}{\PYGZdl{}name}\PYG{k}{)}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{k}{if} \PYG{o}{[} \PYG{l+s+si}{\PYGZdl{}\PYGZob{}\PYGZsh{}}\PYG{n+nv}{backup}\PYG{l+s+si}{\PYGZcb{}} \PYG{o}{==} \PYG{l+m}{0} \PYG{o}{]}
+\PYG{k}{then}
+        \PYG{n+nb}{echo} \PYG{l+s+s2}{\PYGZdq{}tenant with name }\PYG{n+nv}{\PYGZdl{}name}\PYG{l+s+s2}{ has no backup folder\PYGZdq{}}
+        \PYG{n+nb}{exit} \PYG{l+m}{3}
+\PYG{k}{fi}
+
+\PYG{n+nv}{basebackup}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{n+nv}{\PYGZdl{}backup}\PYG{l+s+s2}{/basebackup\PYGZdq{}}
+\PYG{k}{if} \PYG{o}{[} \PYGZhy{}d \PYG{n+nv}{\PYGZdl{}basebackup} \PYG{o}{]}
+\PYG{k}{then}
+        rm \PYGZhy{}rf \PYG{n+nv}{\PYGZdl{}basebackup}/*
+        rm \PYGZhy{}rf \PYG{n+nv}{\PYGZdl{}basebackup}/.\PYG{o}{[}a\PYGZhy{}z\PYG{o}{]}*
+\PYG{k}{else}
+        mkdir \PYG{n+nv}{\PYGZdl{}basebackup}
+        chmod \PYG{l+m}{700} \PYG{n+nv}{\PYGZdl{}basebackup}
+\PYG{k}{fi}
+
+\PYG{l+s+s2}{\PYGZdq{}pg\PYGZus{}basebackup\PYGZdq{}} \PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}h\PYGZdq{}} \PYG{n+nv}{\PYGZdl{}1} \PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}p\PYGZdq{}} \PYG{n+nv}{\PYGZdl{}2} \PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}D\PYGZdq{}} \PYG{n+nv}{\PYGZdl{}basebackup}
+\end{Verbatim}

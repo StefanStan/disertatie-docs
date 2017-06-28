@@ -1,0 +1,186 @@
+\documentclass[12, twoside]{report}
+\usepackage[romanian]{babel}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[letterspace=100]{microtype}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage[a4paper, width=150mm, top=18.5mm, bottom=20mm, bindingoffset=12mm]{geometry}
+\usepackage{titlesec}
+\usepackage{indentfirst}
+\usepackage{euscript}
+\usepackage{enumitem}
+\usepackage{fixltx2e}
+\usepackage{chngcntr}
+\usepackage{wrapfig}
+\usepackage{underscore}
+\usepackage{setspace}
+\usepackage{parallel,enumitem}
+\usepackage{minted}
+\renewcommand\listingscaption{\textbf{Cod sursă}}
+    
+\usemintedstyle{colorful}
+\usepackage[labelfont=bf]{caption}
+\renewcommand{\figurename}{\textbf{Figura}}
+
+\DeclareCaptionType{protocol}[Protocol][List of protocol]
+\newenvironment{protenv}{}{\vspace{1.5em}}
+
+\DeclareCaptionType{result}[Rezultat][List of result]
+\newenvironment{rezenv}{}{\vspace{1.5em}}
+
+% Table of contents customization
+
+% link for table of contents
+\usepackage[linktoc=all]{hyperref}
+\hypersetup{ 
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+}
+
+% dots filling
+\usepackage{tocloft}
+\renewcommand{\contentsname}{Cuprins}
+\renewcommand{\cftpartleader}{\cftdotfill{.}}
+\renewcommand{\cftchapleader}{\cftdotfill{.}}
+\renewcommand{\cftsecleader}{\cftdotfill{.}}
+\renewcommand{\cftsubsecleader}{\cftdotfill{.}}
+\renewcommand{\cftdot}{.}
+
+% space between lines in table of contents
+\setlength{\cftbeforechapskip}{1.5ex}
+\setlength{\cftbeforesecskip}{0.5ex}
+
+% chapters font in table of contents
+\renewcommand{\cftchapfont}{%
+  \fontsize{11}{13}\usefont{OT1}{bch}{bc}{n}\selectfont
+}
+
+% reduce white space before and after the table of contents name
+\setlength{\cftbeforetoctitleskip}{-1em}
+\setlength\cftaftertoctitleskip{10pt}
+
+% parag indentation
+\setlength{\parindent}{7ex}
+
+% chapters spacing
+\titleformat{\chapter}[display]   
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}   
+\titlespacing*{\chapter}{0pt}{-25pt}{10pt}
+
+% remove every Chapter i, i from 1 to nrOfChapters 
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{0pt}{\huge}
+
+% for using euler font with \mathcal{}
+\DeclareMathAlphabet{\mathcal}{U}{eus}{m}{n}
+
+\titlespacing*{\section}
+{0pt}{0pt}{7pt}
+\titlespacing*{\subsection}
+{0pt}{0pt}{0pt}
+\setlist[itemize,1]{leftmargin=\dimexpr 45pt}
+
+\counterwithout{figure}{chapter}
+\counterwithout{protocol}{chapter}
+\counterwithout{result}{chapter}
+
+% pentru cod
+\usepackage{listings}
+
+\lstset{
+        basicstyle=\ttfamily\scriptsize,
+       }
+\renewcommand*{\lstlistingname}{Exemplo de código}
+
+\title{
+	{Security Protocols Checker}
+}
+\author{Ștefan Stan}
+\date{April 2014}
+
+\begin{document}
+
+\input{titlepage}
+\newpage
+\input{declaratii}
+\newpage
+% \thispagestyle{empty} supress the page number
+% \textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{\textit{A}}
+% \textit{\textit{K}}\rlap{\textsuperscript{\textit{d}}}\textsubscript{\textit{A}}
+% \textit{\textit{K}}\textsubscript{\textit{AB}}
+
+\tableofcontents
+
+% for setting the spacing between lines at 1.5 default is  1.0
+\renewcommand{\baselinestretch}{1.5} 
+
+\renewcommand{\bibname}{Bibliografie}
+
+\chapter*{Introducere}
+\input{chapters/Introducere}
+\addcontentsline{toc}{chapter}{Introducere}
+
+\chapter*{Contribuții}
+\input{chapters/Contributii}
+\addcontentsline{toc}{chapter}{Contribuții}
+
+%{\setstretch{1.0}
+\chapter{Point in time recovery}
+\input{chapters/PITR}
+%}
+
+\chapter{Logical Volume Manager (LVM)}
+\input{chapters/LVM}
+
+\chapter{Database Point in time recovery Manager}
+\input{chapters/Arhitectura}
+
+\chapter{DevOps as a Service}
+\input{chapters/DevOpsAsAService}
+
+\chapter{Ghid de utilizare a aplicaţiei}
+\input{chapters/GhidUtilizare}
+
+\chapter{Direcţii de dezvoltare viitoare}
+\input{chapters/DezvViitoare}
+
+\chapter*{Concluzii}
+\input{chapters/Concluzii}
+\addcontentsline{toc}{chapter}{Concluzii}
+
+%\bibliography{myBib}
+
+\begin{thebibliography}{10}
+
+\bibitem{RHEL}
+\newblock Sander van Vugt,
+\newblock Red Hat® RHCSA™/RHCE® 7 Cert Guide: Red Hat Enterprise Linux 7 (EX200 and EX300)
+
+\bibitem{GOF}
+E.~Gamma, R.~Helm, R.~Johnson, and J.~Vlissides.
+\newblock {\em Design Patterns: Elements of Reusable Object-Oriented Software}.
+\newblock Addison-Wesley, 2005.
+
+\bibitem{PITR}
+Postgres Documentation
+\par
+\newblock https://www.postgresql.org/docs/9.5/static/continuous-archiving.html
+
+\bibitem{SPRING}
+\newblock {Craig Walls},
+\newblock Spring in Action, Third Edition
+
+\bibitem{MVC}
+Martin Fowler.
+\newblock {\em GUI Architectures}.
+\newblock 18 July 2006.
+
+\end{thebibliography}
+
+\addcontentsline{toc}{chapter}{Bibliografie}
+
+\end{document}

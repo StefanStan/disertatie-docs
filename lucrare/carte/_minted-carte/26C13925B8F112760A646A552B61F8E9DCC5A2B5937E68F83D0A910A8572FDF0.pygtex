@@ -1,0 +1,53 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{package} \PYG{n+nn}{pgapp.api}\PYG{o}{;}
+
+\PYG{k+kn}{import} \PYG{n+nn}{org.springframework.beans.factory.annotation.Autowired}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{org.springframework.web.bind.annotation.GetMapping}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{org.springframework.web.bind.annotation.PostMapping}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{org.springframework.web.bind.annotation.RequestMapping}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{org.springframework.web.bind.annotation.RequestParam}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{org.springframework.web.bind.annotation.RestController}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{pgapp.dto.DatabaseManagementDetailsObject}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{pgapp.service.DatabaseManagementService}\PYG{o}{;}
+
+\PYG{k+kn}{import} \PYG{n+nn}{java.util.List}\PYG{o}{;}
+
+\PYG{c+cm}{/**}
+\PYG{c+cm}{ * @author Stefan Stan on 06.06.2017.}
+\PYG{c+cm}{ */}
+\PYG{n+nd}{@RestController}
+\PYG{n+nd}{@RequestMapping}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}/pgapp\PYGZdq{}}\PYG{o}{)}
+\PYG{k+kd}{public} \PYG{k+kd}{class} \PYG{n+nc}{DatabaseManagementAPI} \PYG{o}{\PYGZob{}}
+
+    \PYG{n+nd}{@Autowired}
+    \PYG{k+kd}{private} \PYG{n}{DatabaseManagementService} \PYG{n}{dbService}\PYG{o}{;}
+
+    \PYG{n+nd}{@GetMapping}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}/server\PYGZdq{}}\PYG{o}{)}
+    \PYG{k+kd}{public} \PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{n}{String}\PYG{o}{\PYGZgt{}} \PYG{n+nf}{getDBsNames}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+        \PYG{k}{return} \PYG{n}{dbService}\PYG{o}{.}\PYG{n+na}{getDBsNames}\PYG{o}{();}
+    \PYG{o}{\PYGZcb{}}
+
+    \PYG{n+nd}{@PostMapping}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}/server\PYGZdq{}}\PYG{o}{)}
+    \PYG{k+kd}{public} \PYG{n}{DatabaseManagementDetailsObject} \PYG{n+nf}{changeDB}\PYG{o}{(}
+            \PYG{n+nd}{@RequestParam}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}dbServerName\PYGZdq{}}\PYG{o}{)} \PYG{n}{String} \PYG{n}{dbServerName}\PYG{o}{,}
+            \PYG{n+nd}{@RequestParam}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}action\PYGZdq{}}\PYG{o}{)} \PYG{n}{String} \PYG{n}{action}
+    \PYG{o}{)} \PYG{o}{\PYGZob{}}
+        \PYG{k}{return} \PYG{n}{dbService}\PYG{o}{.}\PYG{n+na}{changeDB}\PYG{o}{(}\PYG{n}{dbServerName}\PYG{o}{,} \PYG{n}{action}\PYG{o}{);}
+    \PYG{o}{\PYGZcb{}}
+
+    \PYG{n+nd}{@PostMapping}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}/basebackup\PYGZdq{}}\PYG{o}{)}
+    \PYG{k+kd}{public} \PYG{n}{DatabaseManagementDetailsObject} \PYG{n+nf}{basebackupDB}\PYG{o}{(}
+            \PYG{n+nd}{@RequestParam}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}dbServerName\PYGZdq{}}\PYG{o}{)} \PYG{n}{String} \PYG{n}{dbServerName}
+    \PYG{o}{)} \PYG{o}{\PYGZob{}}
+        \PYG{k}{return} \PYG{n}{dbService}\PYG{o}{.}\PYG{n+na}{basebackupDB}\PYG{o}{(}\PYG{n}{dbServerName}\PYG{o}{);}
+    \PYG{o}{\PYGZcb{}}
+
+    \PYG{n+nd}{@PostMapping}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}/pitr\PYGZdq{}}\PYG{o}{)}
+    \PYG{k+kd}{public} \PYG{n}{DatabaseManagementDetailsObject} \PYG{n+nf}{recoverDB}\PYG{o}{(}
+            \PYG{n+nd}{@RequestParam}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}dbServerName\PYGZdq{}}\PYG{o}{)} \PYG{n}{String} \PYG{n}{dbServerName}\PYG{o}{,}
+            \PYG{n+nd}{@RequestParam}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}dateTime\PYGZdq{}}\PYG{o}{)} \PYG{n}{String} \PYG{n}{dateTime}
+    \PYG{o}{)} \PYG{o}{\PYGZob{}}
+        \PYG{k}{return} \PYG{n}{dbService}\PYG{o}{.}\PYG{n+na}{recoverDB}\PYG{o}{(}\PYG{n}{dbServerName}\PYG{o}{,} \PYG{n}{dateTime}\PYG{o}{,} \PYG{k+kc}{true}\PYG{o}{);}
+    \PYG{o}{\PYGZcb{}}
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,59 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+ch}{\PYGZsh{}!/bin/bash}
+
+\PYG{k}{if} \PYG{o}{[} \PYG{l+s+s2}{\PYGZdq{}}\PYG{n+nv}{\PYGZdl{}\PYGZsh{}}\PYG{l+s+s2}{\PYGZdq{}} \PYGZhy{}ne \PYG{l+m}{2} \PYG{o}{]}
+\PYG{k}{then}
+        \PYG{n+nb}{echo} \PYG{l+s+s2}{\PYGZdq{}Illegal number of parameters. 2 params: date e.g. }
+\PYG{l+s+s2}{			\PYGZsq{}2017\PYGZhy{}06\PYGZhy{}05 14:00:00 EEST\PYGZsq{} true/false if you want to start the db also\PYGZdq{}}
+        \PYG{n+nb}{exit} \PYG{l+m}{1}
+\PYG{k}{fi}
+
+\PYG{n+nv}{name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{k}{\PYGZdl{}(}basename \PYG{n+nv}{\PYGZdl{}0}\PYG{k}{)}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n+nv}{pgdata}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{k}{\PYGZdl{}(}find /pgdata \PYGZhy{}type d \PYGZhy{}name \PYG{n+nv}{\PYGZdl{}name}\PYG{k}{)}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{k}{if} \PYG{o}{[} \PYG{l+s+si}{\PYGZdl{}\PYGZob{}\PYGZsh{}}\PYG{n+nv}{pgdata}\PYG{l+s+si}{\PYGZcb{}} \PYG{o}{==} \PYG{l+m}{0} \PYG{o}{]}
+\PYG{k}{then}
+        \PYG{n+nb}{echo} \PYG{l+s+s2}{\PYGZdq{}tenant with name }\PYG{n+nv}{\PYGZdl{}name}\PYG{l+s+s2}{ has no pgdata folder\PYGZdq{}}
+        \PYG{n+nb}{exit} \PYG{l+m}{2}
+\PYG{k}{fi}
+
+\PYG{n+nv}{backup}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{k}{\PYGZdl{}(}find /backup \PYGZhy{}type d \PYGZhy{}name \PYG{n+nv}{\PYGZdl{}name}\PYG{k}{)}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{k}{if} \PYG{o}{[} \PYG{l+s+si}{\PYGZdl{}\PYGZob{}\PYGZsh{}}\PYG{n+nv}{backup}\PYG{l+s+si}{\PYGZcb{}} \PYG{o}{==} \PYG{l+m}{0} \PYG{o}{]}
+\PYG{k}{then}
+        \PYG{n+nb}{echo} \PYG{l+s+s2}{\PYGZdq{}tenant with name }\PYG{n+nv}{\PYGZdl{}name}\PYG{l+s+s2}{ has no backup folder\PYGZdq{}}
+        \PYG{n+nb}{exit} \PYG{l+m}{3}
+\PYG{k}{fi}
+
+\PYG{n+nv}{basebackup}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{n+nv}{\PYGZdl{}backup}\PYG{l+s+s2}{/basebackup\PYGZdq{}}
+\PYG{k}{if} \PYG{o}{[} \PYG{l+s+si}{\PYGZdl{}\PYGZob{}\PYGZsh{}}\PYG{n+nv}{basebackup}\PYG{l+s+si}{\PYGZcb{}} \PYG{o}{==} \PYG{l+m}{0} \PYG{o}{]}
+\PYG{k}{then}
+        \PYG{n+nb}{echo} \PYG{l+s+s2}{\PYGZdq{}tenant with name }\PYG{n+nv}{\PYGZdl{}name}\PYG{l+s+s2}{ has no basebackup folder\PYGZdq{}}
+        \PYG{n+nb}{exit} \PYG{l+m}{4}
+\PYG{k}{fi}
+
+\PYG{n+nv}{wal}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{n+nv}{\PYGZdl{}backup}\PYG{l+s+s2}{/wal\PYGZdq{}}
+\PYG{k}{if} \PYG{o}{[} \PYG{l+s+si}{\PYGZdl{}\PYGZob{}\PYGZsh{}}\PYG{n+nv}{wal}\PYG{l+s+si}{\PYGZcb{}} \PYG{o}{==} \PYG{l+m}{0} \PYG{o}{]}
+\PYG{k}{then}
+        \PYG{n+nb}{echo} \PYG{l+s+s2}{\PYGZdq{}tenant with name }\PYG{n+nv}{\PYGZdl{}name}\PYG{l+s+s2}{ has no WAL files folder\PYGZdq{}}
+        \PYG{n+nb}{exit} \PYG{l+m}{5}
+\PYG{k}{fi}
+
+\PYG{c+c1}{\PYGZsh{} TO DO: make sure that the server instance is stopped}
+\PYG{l+s+s2}{\PYGZdq{}/home/ec2\PYGZhy{}user/disertatie/server/}\PYG{n+nv}{\PYGZdl{}name}\PYG{l+s+s2}{\PYGZdq{}} \PYG{l+s+s2}{\PYGZdq{}stop\PYGZdq{}}
+
+\PYG{c+c1}{\PYGZsh{} TO DO: backup logs and other things of interes before empty pgdata dir}
+rm \PYGZhy{}rf \PYG{n+nv}{\PYGZdl{}pgdata}/*
+rm \PYGZhy{}rf \PYG{n+nv}{\PYGZdl{}pgdata}/.\PYG{o}{[}a\PYGZhy{}z\PYG{o}{]}*
+
+\PYG{l+s+s2}{\PYGZdq{}cp\PYGZdq{}} \PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}a\PYGZdq{}} \PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}r\PYGZdq{}} \PYG{l+s+s2}{\PYGZdq{}}\PYG{n+nv}{\PYGZdl{}basebackup}\PYG{l+s+s2}{/.\PYGZdq{}} \PYG{n+nv}{\PYGZdl{}pgdata}
+
+\PYG{n+nv}{result}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}restore\PYGZus{}command = \PYGZsq{}cp }\PYG{n+nv}{\PYGZdl{}wal}\PYG{l+s+s2}{/\PYGZpc{}f \PYGZpc{}p\PYGZsq{}\PYGZbs{}n}
+\PYG{l+s+s2}{recovery\PYGZus{}target\PYGZus{}time = \PYGZsq{}}\PYG{n+nv}{\PYGZdl{}1}\PYG{l+s+s2}{\PYGZsq{}\PYGZdq{}}
+
+\PYG{n+nb}{echo} \PYGZhy{}e \PYG{n+nv}{\PYGZdl{}result} \PYGZgt{} \PYG{n+nv}{\PYGZdl{}pgdata}/recovery.conf
+
+\PYG{k}{if} \PYG{o}{[} \PYG{n+nv}{\PYGZdl{}2} \PYG{o}{==} \PYG{n+nb}{true} \PYG{o}{]}
+\PYG{k}{then}
+        \PYG{c+c1}{\PYGZsh{} Start the db server which will trigger recovery}
+        \PYG{l+s+s2}{\PYGZdq{}/home/ec2\PYGZhy{}user/disertatie/server/}\PYG{n+nv}{\PYGZdl{}name}\PYG{l+s+s2}{\PYGZdq{}} \PYG{l+s+s2}{\PYGZdq{}start\PYGZdq{}}
+\PYG{k}{fi}
+\end{Verbatim}

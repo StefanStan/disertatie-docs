@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{n}{codeArea}\PYG{o}{.}\PYG{n+na}{textProperty}\PYG{o}{().}\PYG{n+na}{addListener}\PYG{o}{((}\PYG{n}{obs}\PYG{o}{,} \PYG{n}{oldText}\PYG{o}{,} \PYG{n}{newText}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{\PYGZob{}}
+    	
+    	\PYG{n}{codeArea}\PYG{o}{.}\PYG{n+na}{setStyleSpans}\PYG{o}{(}\PYG{l+m+mi}{0}\PYG{o}{,} \PYG{n}{computeHighlighting}\PYG{o}{(}\PYG{n}{newText}\PYG{o}{));}
+    \PYG{o}{\PYGZcb{});}
+\end{Verbatim}

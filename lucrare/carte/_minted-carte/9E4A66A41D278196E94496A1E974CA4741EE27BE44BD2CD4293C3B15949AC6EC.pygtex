@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+ch}{\PYGZsh{}!/bin/bash}
+
+\PYG{n+nv}{name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{k}{\PYGZdl{}(}basename \PYG{n+nv}{\PYGZdl{}0}\PYG{k}{)}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n+nv}{pgdata}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{k}{\PYGZdl{}(}find /pgdata \PYGZhy{}type d \PYGZhy{}name \PYG{n+nv}{\PYGZdl{}name}\PYG{k}{)}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n+nv}{logFile}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{n+nv}{\PYGZdl{}pgdata}\PYG{l+s+s2}{/pg\PYGZus{}log/startup.log\PYGZdq{}}
+
+\PYG{k}{if} \PYG{o}{[} ! \PYGZhy{}f \PYG{n+nv}{\PYGZdl{}logFile} \PYG{o}{]}
+\PYG{k}{then}
+        \PYG{l+s+s2}{\PYGZdq{}/bin/touch\PYGZdq{}} \PYG{l+s+s2}{\PYGZdq{}}\PYG{n+nv}{\PYGZdl{}logFile}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{k}{fi}
+
+\PYG{l+s+s2}{\PYGZdq{}/usr/lib64/pgsql95/bin/pg\PYGZus{}ctl\PYGZdq{}} \PYG{n+nv}{\PYGZdl{}1} \PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}D\PYGZdq{}} \PYG{n+nv}{\PYGZdl{}pgdata} \PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}l\PYGZdq{}} \PYG{n+nv}{\PYGZdl{}logFile}
+\end{Verbatim}

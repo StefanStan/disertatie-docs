@@ -1,0 +1,40 @@
+\BOOKMARK [0][-]{chapter*.2}{Introducere}{}% 1
+\BOOKMARK [0][-]{chapter*.3}{Contributii}{}% 2
+\BOOKMARK [0][-]{chapter.1}{Anonimitatea \356n contextul ascunderii de informatii}{}% 3
+\BOOKMARK [1][-]{section.1.1}{Retele de mix-uri}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.2}{Retele DC}{chapter.1}% 5
+\BOOKMARK [0][-]{chapter.2}{Fundamente teoretice}{}% 6
+\BOOKMARK [1][-]{section.2.1}{Formatul unui protocol}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.2}{Termi}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.3}{Actiuni}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.4}{Protocoale}{chapter.2}% 10
+\BOOKMARK [0][-]{chapter.3}{Arhitectura aplicatiei}{}% 11
+\BOOKMARK [0][-]{chapter.4}{Transpunerea modelului \356n implementare}{}% 12
+\BOOKMARK [1][-]{section.4.1}{Modelare si proiectare}{chapter.4}% 13
+\BOOKMARK [2][-]{subsection.4.1.1}{Sablonul de proiectare Composite. Abstractizarea termilor}{section.4.1}% 14
+\BOOKMARK [2][-]{subsection.4.1.2}{Sablonul de proiectare Singleton. Atacatorul}{section.4.1}% 15
+\BOOKMARK [1][-]{section.4.2}{Definirea specificatiei. Validarea sintactica si semantica}{chapter.4}% 16
+\BOOKMARK [2][-]{subsection.4.2.1}{Verificarea sintactica}{section.4.2}% 17
+\BOOKMARK [2][-]{subsection.4.2.2}{Verificarea semantica}{section.4.2}% 18
+\BOOKMARK [1][-]{section.4.3}{\316ncarcarea unui protocol pornind de la o specificatie}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.4}{Algoritmul de verificare a rezistentei la un intrus activ}{chapter.4}% 20
+\BOOKMARK [2][-]{subsection.4.4.1}{Pasii preliminari algoritmului}{section.4.4}% 21
+\BOOKMARK [2][-]{subsection.4.4.2}{Algoritmul de verificare a rezistentei la un intrus activ}{section.4.4}% 22
+\BOOKMARK [2][-]{subsection.4.4.3}{Aflarea termilor cu care poate fi \356nlocuit un mesaj}{section.4.4}% 23
+\BOOKMARK [0][-]{chapter.5}{Interfata grafica}{}% 24
+\BOOKMARK [1][-]{section.5.1}{Editorul de specificatii}{chapter.5}% 25
+\BOOKMARK [1][-]{section.5.2}{Panoul de control}{chapter.5}% 26
+\BOOKMARK [1][-]{section.5.3}{Fisierele de configurare}{chapter.5}% 27
+\BOOKMARK [1][-]{section.5.4}{Colorarea sintactica}{chapter.5}% 28
+\BOOKMARK [0][-]{chapter.6}{Ghid de utilizare a aplicatiei}{}% 29
+\BOOKMARK [0][-]{chapter.7}{Protocoale de securitate}{}% 30
+\BOOKMARK [1][-]{section.7.1}{Un protocol vulnerabil la integritate si confidentialitate}{chapter.7}% 31
+\BOOKMARK [1][-]{section.7.2}{Un protocol vulnerabil la integritate}{chapter.7}% 32
+\BOOKMARK [1][-]{section.7.3}{Un protocol vulnerabil la confidentialitate}{chapter.7}% 33
+\BOOKMARK [1][-]{section.7.4}{Un protocol sigur}{chapter.7}% 34
+\BOOKMARK [1][-]{section.7.5}{Protocolul Needham-Schroeder, vulnerabil la confidentialitate}{chapter.7}% 35
+\BOOKMARK [1][-]{section.7.6}{Protocolul Needham-Schroeder-Lowe, sigur}{chapter.7}% 36
+\BOOKMARK [1][-]{section.7.7}{Protocolul BAN modified Andrew Secure RPC, sigur}{chapter.7}% 37
+\BOOKMARK [0][-]{chapter.8}{Directii de dezvoltare viitoare}{}% 38
+\BOOKMARK [0][-]{chapter*.15}{Concluzii}{}% 39
+\BOOKMARK [0][-]{chapter*.16}{Bibliografie}{}% 40

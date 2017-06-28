@@ -1,0 +1,9 @@
+Am creat o aplicatie pornind de la necesitatea prezentata in capitolul \textit{Introducere}. Scopul acesteia este de a oferi o metoda facila de a restaura o baza de date la un moment de timp oferit de catre utilizator. Acesta nu necesita cunostinte de baze de date, sau de devOps (nu e nevoie sa interactioneze cu scripturi de UNIX).
+\par
+Pentru a realiza cele mentionate anterior am studiat modalitatea bazei de date PostgreSQL de management intern a transactiilor si am utilizat-o intro maniera ce imi permite restaurarea bazei de date la un moment in timp cu o granularitate fina, la secunda.
+\par
+De asemenea, am studiat modalitatea sistemului de operare UNIX ce permite creare de partitii virtuale ce pot fi oricand modificate in ceea ce priveste marimea fara a inchide baza de date. Am combinat aceasta functionaliate a sistemului de operare impreuna cu solutia propusa, pentru a realiza cele prezentate cu un timp minim de inaccesibilitate a bazei de date. \textit{Capitolul 3} prezinta in detaliu aceste aspecte.
+\par
+Am propus o arhitectura a sistemului de fisiere bazat pe studiul prezentat anterior si am utilizat-o in implementarea propriu-zisa. Cat despre aceasta, am folosit serviciile Amazon Cloud (EC2, EBS) pentru a face deploy solutiei (scripturi ce interactioneaza cu baza de date, aplicatie backend si aplicatie frontend).
+\par
+In opinia mea, prin studiul realizat si prin intermediul solutiei propuse am reusit sa realizez ce mi-am propus si am oferit o modalitate de management a bazelor de date si de restaurare a acestora la starea existenta un moment de timp. Prin urmare am realizat o aplicatie usor de utilizat de catre persoane ce nu au cunostinta de baze de date, sistem de operare UNIX.

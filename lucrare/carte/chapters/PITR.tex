@@ -1,0 +1,64 @@
+"Point in time recovery" în contextul informaticii se referă la funcționalitatea unui sistem folosită de un administrator pentru a restabili sau recupera un set de date existent la un moment dat.
+\par
+PostgreSQL menține în fiecare moment un \textit{write ahead log} WAL în subdirectorul pg_xlog al directorului de bază unde avem clusterul de baze de date. Acest log reține fiecare schimbare facută în fișierele bazei de date. Există, în principiu, pentru momentele în care sistemul cedează. Dacă acest lucru se întampla, datele pot fi recuperate prin o executare a secventei instrucțiunilor din log de la momentul ultimei salvări până înainte de momentul critic. Totuși, existența acestui log face posibilă o a treia strategie de restaurare a bazei de date: putem combina un backup la nivel de sistem de fișiere a bazei de date cu un backup al fișierelor WAL. Dacă avem nevoie să recuperăm datele vom restaura backup făcut la nivel de sistem de fișiere și apoi vom executa o secvență de fișiere WAL pentru a aduce baza de date la o versiune stabilă. Această abordare este complexă și dificil de setat, dar are multe beneficii:
+\begin{itemize}
+\item Nu avem nevoie de o stare consistentă a backup la nivel de sistem de fișiere. Orice inconsistentă va fi remediată prin executarea secvenței de fișiere WAL (nu este cine știe ce diferit de ceea ce se întamplă în momentul în care sistemul își revine după ce a cedat). Astfel că, avem nevoie de un utilitar capabil să creeze salvări pe disc, tar zip etc.
+\item De vreme ce putem folosi o secvență nedefinită de fișiere WAL, backup continuu se poate realiza pur și simplu arhivând fișierele WAL. Această tehnică este foarte folositoare în cazul bazelor de date mari, unde nu este avantajos să facem backup complet în mod frecvent.
+\item Nu este necesar să executăm toată secvență de fișiere WAL. Putem să ne oprim la orice moment din timp în care baza de date era consistentă. Astfel că, această tehnică suportă \textit{point in time recovery}. Este posibil să restaurăm baza de date la orice moment existent dacă avem fișiere WAL.
+\item Daca oferim încontinuu fișiere WAL unei mașini noi ce a fost încărcată de la aceeași salvare, putem avea un sistem aflat în hibernare pe care îl putem aduce în orice moment în funcțiune având setul de date aflat în producție.
+\end{itemize}
+Pentru a recupera date cu succes folosind strategia de arhivare continuuă este nevoie de o secvența continuuă de fișiere WAL arhivate ce există cel putin de la momentul în care am creat acel basebackup (o stare a bazei de date aflata pe disc, un checkpoint). Pentru a începe e nevoie să setam și să testăm procedura de salvare a fișierelor WAL, înainte de a face primul basebackup. In cele ce urmează vom discuta mecanismul de arhivare a fișierelor WAL.
+\section{Setarea arhivarii fișierelor WAL}
+Într-un mod abstract, un sistem PostgreSQL produce o secvență nedefinită de înregistrări WAL. Sistemul împarte această secvență în fișiere WAL, care sunt în mod normal de 16MB fiecare (deși dimensiunea segmentului poate fi alterată cand facem build la PostgreSQL). Fișierele segment au numele într-un format numeric care reflectă poziția lor în secvența abstractă WAL. Când nu folosim arhivarea fișierelor WAL sistemul creează cateva fișiere pe care le reciclează redenumindu-le pe cele vechi și marcându-le pentru ștergere.
+\par
+Când arhivăm datele WAL trebuie să prindem conținutul fiecarui segment de îndată ce devine complet și să salvăm datele undeva până ca segmentul devine reciclat și refolosit. În funcție de aplicație și harware folosit, pot exista mai mult moduri să "salvăm datele undeva": putem copia segmentul într-o locație pe un disc extern, le putem trimite în cloud pe un cont de Amazon S3, Google Drive... le putem trimite prin rețea oriunde etc. PostgreSQL încearca să nu facă supoziții despre modul de arhivare a datelor pentru a facilita munca administratorului. În schimb, PosgreSQL lasă administratorul să ofere o comandă shell ce se va executa pentru a copia orice segment complet oriunde trebuie să meargă. Această comandă poate fi la fel de simpla ca un \textbf{cp}, sau se poate invoca un script complex de linux.
+\par 
+Pentru a activa arhivarea WAL trebuie să se parcurga o serie de pași:
+\begin{itemize}
+\item să se seteze \textbf{wal_level} ca fiind \textbf{archive} sau mai mare. (wal_level determină câtă informație se scrie în fiecare WAL. Implicit e setat ca fiind \textbf{minimal}, ceea ce înseamnă că se scrie doar informația necesară pentru a se restaura dupa o problemă sau dupa o închidere imediată; \textbf{archive} adaugă informații necesare pentru arhivarea WAL; \textbf{hot_standby} adaugă informații necesare pentru a rula interogari în mod citire pe un server aflat in pauza; \textbf{logical} adaugă informații necesare pentru a suporta decodare logică)
+\item să se specifice o comandă shell în parametrul \textbf{archive_command}. În comanda de arhivare, parametrul \%p este înlocuit cu calea către fișierul WAL, în timp ce parametrul \%f este înlocuit cu numele fișierului. Calea este relativă la fișierul curent (fișierul în care se află clusterul de baza de date). Cea mai simplă comandă este de genul:\\ \textbf{archive_command = 'test ! -f /mnt/server/archivedir/\%f \&\& cp \%p /mnt/server/archivedir/\%f'}\\
+Comanda va copia segmentul WAL în directorul /mnt/server/archvedir.
+\end{itemize}
+După ce s-au înlocuit parametrii \%p si \%f cmd. ce fa fi exec. va arata astfel: \\
+\textbf{test ! -f /mnt/server/archivedir/00000001000000A900000065 \&\& cp pg_xlog/00000001000000A900000065 /mnt/server/archivedir/00000001000000A900000065}\\
+O comandă similară va fi executată pentru fiecare segment nou ce fa fi generat. Comanda de arhivare va fi executată sub acealași utitizator ca și serverul PostgreSQL. De vreme ce seria de fișiere WAL conține efectiv datele din baza de date, va fi nevoie ca datele arhivate să fie protejate de către accesul neautorizat. Putem să nu oferim drept de citire pentru grup și pentru ceilalți.
+\par
+Comanda de arhivare este important să returneze statusul 0. PostgreSQL, cand primește 0 va crede că fișierul a fost arhivat cu succes și îl va șterge/ marca pentru reciclare. Însă, un status diferit de 0 va spune PostgreSQL ca arhivarea a eșuat și acesta va păstra fișierul reîncercând ulterior.
+\par
+Comanda de arhivare ar trebui construită în așa fel încât să refuze să suprascrie fișiere pre-existente. Această funcționalitate este o metodă de siguranță prin care se asigură integritatea datelor în cazul unei erori a administratorului (trimite rezultatul de pe doua servere în același director).
+\par
+Este de preferat să se testeze comanda propusă pentru arhivare, astfel că aceasta sa nu suprascrie fișiere și să returneze status diferit de 0 cand se încearcă acest lucru. Comanda oferită ca exemplu mai sus asigură acest lucru prin pasul de testare inițial. Unix deține pe anumite platforme opțiuni precum \textbf{-i} ce pot fi folosite pentru a realiza același lucru, dar nu trebuie să ne bazam pe ele ci să verificăm codul returnat de fiecare dată.
+\\
+Aceste setări vor fi modificate în fișierul \textbf{postgresql.conf}
+\vspace{4cm}
+\section{Crearea unui basebackup}
+Un basebackup este o salvare pe disc la un moment dat a bazei de date, de la care se va porni procesul de executare a fisierelor WAL.
+\par 
+Cel mai ușor mod de a crea un basebackup este folosirea utilitarei \textbf{pg_basebackup}. Se poate crea un basebackup fie ca și fișiere normale pe disc sau ca și arhivă(tar). Nu este neaparat nevoie să fim îngrijorați de timpul necesar crearii basebackup. Totuși, dacă serverul rulează cu opțiunea \textbf{full_page_writes} dezactivată s-ar putea observa o scadere în performantă, de vreme ce procedura de basebackup rulează automat cu opțiunea \textbf{full_page_writes} activată în mod forțat.
+\par
+Pentru a ne folosi de basebackup trebuie să reținem toate fișierele WAL din timpul creării basebackup și după. Pentru a ne ajuta în acest proces, procedura de basebackup creează un fișier backup_history ce este mutat imediat în locația fișierelor WAL. Fișierul este denumit după primul fișier care este necesar pentru recovery folosind acel basebackup. Odată ce procesul de basebackup s-a terminat cu succes nu mai este nevoie de fișierele WAL de dinainte de crearea basebackup, de vreme ce avem o stare stabilă a bazei de date la momentul creării basebackup, de la care se va porni un proces ulterior de executare a fișierelor WAL pentru revenirea în caz de dezastru a bazei de date.
+\par 
+De vreme ce trebuie să salvăm fișierele WAL arhivate până la momentul ultimului basebackup înseamnă că intervalul între care se creează basebackups trebuie ales în funcție de căt spațiu de stocare vrem să folosim pentru a salva fișierele WAL. De asemenea, este de considerat și timpul pe care vrem sa îl alocam unui eventual proces de restabilire a bazei de date. Dacă este necesar acest lucru va trebui să executam fiecare fișier WAL și ar putea dura destul de mult în caz că ultimul basebackup a fost facut acum mult timp.
+\vspace{6cm}
+\section{Restabilirea db. folosind Continuous Archive Backup}
+Să presupunem că ce e mai rau s-a intamplat și e nevoie să restabilim baza de date. Procedura este urmatoarea:
+\begin{enumerate}
+\item
+Se oprește serverul, dacă ruleaza.
+\item
+Se copie conținutul fișierul \textbf{pg_xlog} ce poate conține fișiere log cu motivele pentru care sistemul a ajuns într-o stare inconsistentă, precum și segmentele WAL nearhivate (ce nu au atins pragul necesar (implicit 16MB) pentru a fi arhivate)
+\item
+Se șterge orice fișier din locația clusterului de baze de date.
+\item
+Se copie datele ultimului basebackup în locația clusterului de baze de date. Trebuie verificate drepturile de acces la fișierele/directoarele copiate.
+\item
+Se șterge conținutul directorului pg_xlog copiat din basebackup, deoarece nu este de actualitate. Se copie fișierele din directorul pg_xlog salvat anterior.
+\item
+Se creează un fișier \textbf{recovery.conf}. De asemenea se va modifica și fișierul \textbf{pg_hba.conf} pentru a nu da voie utilizatorilor obișnuiți să se conecteze până când procesul de recuperare nu se termină.
+\item
+Se pornește server-ul. Acesta va intra automat în mod de recuperare și va începe să execute fișierele WAL, dacă există. Daca procesul eșuează din motive externe, se poate restarta serverul și va continua. În momentul în care procesul se termina se va redenumi fișierul \textbf{recovery.conf} în \textbf{recovery.done} pentru a preveni porniri ulterioare ale procesului de recuperare. Baza de date va funționa normal de acum.
+\item 
+Se inspectează baza de date pentru a se vedea dacă starea este una consistentă și dorită.
+\end{enumerate}
+Procesul se bazează pe setarea unui fișier de configurare \textbf{recovery.conf} ce specifică cum să se execute procesul și până când anume. Singurul lucru neaparat necesar în fișierul de restaurare este \textbf{recovery_command} care specifică ce comandă shell se va executa pentru a recupera fișierele WAL. Aceasta este construită precum \textbf{archive_command} prezentată anterior.\\
+De exemplu: \textbf{restore_command = 'cp /mnt/server/archivedir/\%f \%p'}

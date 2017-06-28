@@ -1,0 +1,33 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{k+kd}{private} \PYG{k+kt}{boolean} \PYG{n+nf}{isProtocolSafe}\PYG{o}{(}\PYG{n}{String} \PYG{n}{protocolDesc}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+
+        \PYG{c+c1}{//  pașii preliminari algortmului de rulare}
+	\PYG{n}{Intruder} \PYG{n}{intruder} \PYG{o}{=} \PYG{n}{Intruder}\PYG{o}{.}\PYG{n+na}{getInstance}\PYG{o}{();}
+
+        \PYG{n}{intruder}\PYG{o}{.}\PYG{n+na}{clearEveryInfo}\PYG{o}{();}
+        
+        \PYG{n}{intruder}\PYG{o}{.}\PYG{n+na}{dontUseMasterProtocol}\PYG{o}{();}
+        \PYG{n}{Protocol} \PYG{n}{masterProtocol} \PYG{o}{=} \PYG{n}{Protocol}\PYG{o}{.}\PYG{n+na}{loadProtocol}\PYG{o}{(}\PYG{n}{protocolDesc}\PYG{o}{,} \PYG{k+kc}{null}\PYG{o}{);}
+
+        \PYG{n}{intruder}\PYG{o}{.}\PYG{n+na}{useMasterProtocol}\PYG{o}{();}
+        \PYG{n}{masterProtocol}\PYG{o}{.}\PYG{n+na}{run}\PYG{o}{();}
+        
+        \PYG{n}{intruder}\PYG{o}{.}\PYG{n+na}{dontUseMasterProtocol}\PYG{o}{();}
+        \PYG{n}{Protocol} \PYG{n}{myProtocol} \PYG{o}{=} \PYG{n}{Protocol}\PYG{o}{.}\PYG{n+na}{loadProtocol}\PYG{o}{(}\PYG{n}{protocolDesc}\PYG{o}{,} \PYG{k+kc}{null}\PYG{o}{);}
+
+
+	\PYG{c+c1}{//  rularea efectivă a instanței de protocol}
+        \PYG{n}{myProtocol}\PYG{o}{.}\PYG{n+na}{run}\PYG{o}{(}\PYG{l+m+mi}{1}\PYG{o}{);}
+        \PYG{k}{if}\PYG{o}{(}\PYG{n}{myProtocol}\PYG{o}{.}\PYG{n+na}{getLog}\PYG{o}{().}\PYG{n+na}{isCorrect}\PYG{o}{())\PYGZob{}}
+
+            \PYG{n}{myProtocol}\PYG{o}{.}\PYG{n+na}{reset}\PYG{o}{();}
+            \PYG{n}{myProtocol}\PYG{o}{.}\PYG{n+na}{run}\PYG{o}{(}\PYG{l+m+mi}{2}\PYG{o}{);}
+            \PYG{k}{if} \PYG{o}{(}\PYG{n}{myProtocol}\PYG{o}{.}\PYG{n+na}{getLog}\PYG{o}{().}\PYG{n+na}{isCorrect}\PYG{o}{())\PYGZob{}}
+
+                \PYG{k}{return} \PYG{k+kc}{true}\PYG{o}{;}
+            \PYG{o}{\PYGZcb{}}
+        \PYG{o}{\PYGZcb{}}
+
+        \PYG{k}{return} \PYG{k+kc}{false}\PYG{o}{;}
+    \PYG{o}{\PYGZcb{}}
+\end{Verbatim}

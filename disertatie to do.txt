@@ -1,0 +1,117 @@
+OS: Centos 7
+
+Postgres: 9.5 Community Edition https://www.postgresql.org/download/linux/redhat/
+
+LVM: Physical/Volume/Logical - RHCSA Chapter 15
+
+Automated System: Ansible | Puppet?Chef
+
+Business Continuity - Point in Time Recovery (basebackups + WALs) 
+
+Replication: DRBD?Alternative
+
+ 
+
+ 
+
+Presentation: Stress test -> Demonstrate HA, Graph showing results ...,   
+
+Environment: [Haproxy] -> Java app[JBOSS](clustered) -> PgBouncer -> Postgres Cluster(more than one instance)
+
+ 
+
+Plan 
+
+week1
+
+Install CentOS7
+
+Configure LVM
+
+Install Posgresql CE
+
+SPIKE[Ansible -> create machines from scratch|integration with Vagrant]
+
+
+week 3
+
+OS: Centos 7
+
+Postgres: 9.5 Community Edition https://www.postgresql.org/download/linux/redhat/
+
+LVM: Physical/Volume/Logical - RHCSA Chapter 15
+
+Automated System: Ansible | Puppet?Chef
+
+Business Continuity - Point in Time Recovery (basebackups + WALs) 
+
+Replication: DRBD?Alternative
+
+ 
+
+ 
+
+Presentation: Stress test -> Demonstrate HA, Graph showing results ...,   
+
+Environment: [Haproxy] -> Java app[JBOSS](clustered) -> PgBouncer -> Postgres Cluster(more than one instance)
+
+ 
+
+Plan:
+
+Install CentOS7
+
+Configure LVM
+
+Install Posgresql CE
+
+SPIKE[Ansible -> create machines from scratch|integration with Vagrant]
+script 
+
+
+
+
+
+Postgres.init file 
+
+ 
+
+======
+
+NAME=$(basename $0)
+
+ 
+
+# Installation prefix
+
+prefix="/opt/pgsql-9.2"
+
+ 
+
+# Data directory (Don't end with a slash.)
+
+PGDATA=$(ls -d /srv/*/db/$NAME)
+
+ 
+
+# Who to run the postmaster as, usually "postgres".  (NOT "root")
+
+PGUSER="$NAME"
+
+ 
+
+# Where to keep a log file
+
+PGLOG="$PGDATA/pg_log/startup.log"
+
+=====
+
+Create symlink with the name of the database cluster (ln -s /../../postres.init /a/b/clustername )
+
+ 
+
+ 
+
+1.      Create multiple instances of Postgres and run them. 
+
+2.      PITR : https://www.postgresql.org/docs/9.5/static/continuous-archiving.html (basebackup + WAL)

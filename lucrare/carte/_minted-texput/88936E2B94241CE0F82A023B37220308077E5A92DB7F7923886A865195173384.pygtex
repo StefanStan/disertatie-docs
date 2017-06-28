@@ -1,0 +1,64 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{public} \PYG{n}{ArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{Term}\PYG{o}{\PYGZgt{}} \PYG{n+nf}{replaceMessage}\PYG{o}{(}\PYG{n}{Protocol} \PYG{n}{protocol}\PYG{o}{,} \PYG{n}{Term} \PYG{n}{message}\PYG{o}{,} \PYG{n}{Agent} \PYG{n}{to}\PYG{o}{,} \PYG{n}{Agent} \PYG{n}{from}\PYG{o}{)\PYGZob{}}
+
+    \PYG{n}{ArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{Term}\PYG{o}{\PYGZgt{}} \PYG{n}{possibleChoices} \PYG{o}{=} \PYG{k}{new} \PYG{n}{ArrayList}\PYG{o}{\PYGZlt{}\PYGZgt{}();}
+    \PYG{k}{if}\PYG{o}{(}\PYG{n}{message} \PYG{k}{instanceof} \PYG{n}{Agent}\PYG{o}{)\PYGZob{}}
+
+        \PYG{n}{possibleChoices}\PYG{o}{.}\PYG{n+na}{addAll}\PYG{o}{(}\PYG{n}{replaceTerm}\PYG{o}{(}\PYG{n}{protocol}\PYG{o}{,} \PYG{o}{(}\PYG{n}{Agent}\PYG{o}{)} \PYG{n}{message}\PYG{o}{));}
+        \PYG{k}{return} \PYG{n}{possibleChoices}\PYG{o}{;}
+    \PYG{o}{\PYGZcb{}}
+    \PYG{k}{if}\PYG{o}{(}\PYG{n}{message} \PYG{k}{instanceof} \PYG{n}{Key}\PYG{o}{)\PYGZob{}}
+
+        \PYG{n}{possibleChoices}\PYG{o}{.}\PYG{n+na}{addAll}\PYG{o}{(}\PYG{n}{replaceTerm}\PYG{o}{(}\PYG{n}{protocol}\PYG{o}{,} \PYG{o}{(}\PYG{n}{Key}\PYG{o}{)} \PYG{n}{message}\PYG{o}{));}
+        \PYG{k}{return} \PYG{n}{possibleChoices}\PYG{o}{;}
+    \PYG{o}{\PYGZcb{}}
+    \PYG{k}{if}\PYG{o}{(}\PYG{n}{message} \PYG{k}{instanceof} \PYG{n}{BasicTerm}\PYG{o}{)\PYGZob{}}
+
+        \PYG{n}{possibleChoices}\PYG{o}{.}\PYG{n+na}{addAll}\PYG{o}{(}\PYG{n}{replaceTerm}\PYG{o}{(}\PYG{n}{protocol}\PYG{o}{,} \PYG{o}{(}\PYG{n}{BasicTerm}\PYG{o}{)} \PYG{n}{message}\PYG{o}{));}
+        \PYG{k}{return} \PYG{n}{possibleChoices}\PYG{o}{;}
+    \PYG{o}{\PYGZcb{}}
+    \PYG{k}{if}\PYG{o}{(}\PYG{n}{message} \PYG{k}{instanceof} \PYG{n}{Nonce}\PYG{o}{)\PYGZob{}}
+
+        \PYG{n}{possibleChoices}\PYG{o}{.}\PYG{n+na}{addAll}\PYG{o}{(}\PYG{n}{replaceTerm}\PYG{o}{(}\PYG{n}{protocol}\PYG{o}{,} \PYG{o}{(}\PYG{n}{Nonce}\PYG{o}{)} \PYG{n}{message}\PYG{o}{));}
+        \PYG{k}{return} \PYG{n}{possibleChoices}\PYG{o}{;}
+    \PYG{o}{\PYGZcb{}}
+    \PYG{k}{if}\PYG{o}{(}\PYG{n}{message} \PYG{k}{instanceof} \PYG{n}{CompoundTerm}\PYG{o}{)\PYGZob{}}
+
+        \PYG{n}{possibleChoices}\PYG{o}{.}\PYG{n+na}{addAll}\PYG{o}{(}\PYG{n}{replaceTerm}\PYG{o}{(}\PYG{n}{protocol}\PYG{o}{,} \PYG{o}{(}\PYG{n}{CompoundTerm}\PYG{o}{)} \PYG{n}{message}\PYG{o}{,} \PYG{n}{to}\PYG{o}{,} \PYG{n}{from}\PYG{o}{));}
+        \PYG{k}{return} \PYG{n}{possibleChoices}\PYG{o}{;}
+
+    \PYG{o}{\PYGZcb{}}
+    \PYG{k}{if}\PYG{o}{(}\PYG{n}{message} \PYG{k}{instanceof} \PYG{n}{EncryptedTerm}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+
+        \PYG{n}{possibleChoices}\PYG{o}{.}\PYG{n+na}{addAll}\PYG{o}{(}\PYG{n}{replaceTerm}\PYG{o}{(}\PYG{n}{protocol}\PYG{o}{,} \PYG{o}{(}\PYG{n}{EncryptedTerm}\PYG{o}{)} \PYG{n}{message}\PYG{o}{,} \PYG{n}{to}\PYG{o}{,} \PYG{n}{from}\PYG{o}{));}
+        \PYG{k}{return} \PYG{n}{possibleChoices}\PYG{o}{;}
+    \PYG{o}{\PYGZcb{}}
+    \PYG{k}{return} \PYG{n}{possibleChoices}\PYG{o}{;}
+\PYG{o}{\PYGZcb{}}
+
+\PYG{k+kd}{private} \PYG{n}{ArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{Term}\PYG{o}{\PYGZgt{}} \PYG{n+nf}{replaceTerm}\PYG{o}{(}\PYG{n}{Protocol} \PYG{n}{prot}\PYG{o}{,} \PYG{n}{Agent} \PYG{n}{message}\PYG{o}{);}
+\PYG{k+kd}{private} \PYG{n}{ArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{Term}\PYG{o}{\PYGZgt{}} \PYG{n+nf}{replaceTerm}\PYG{o}{(}\PYG{n}{Protocol} \PYG{n}{prot}\PYG{o}{,} \PYG{n}{Key} \PYG{n}{message}\PYG{o}{);}
+\PYG{k+kd}{private} \PYG{n}{ArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{Term}\PYG{o}{\PYGZgt{}} \PYG{n+nf}{replaceTerm}\PYG{o}{(}\PYG{n}{Protocol} \PYG{n}{prot}\PYG{o}{,} \PYG{n}{BasicTerm} \PYG{n}{message}\PYG{o}{);}
+\PYG{k+kd}{private} \PYG{n}{ArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{Term}\PYG{o}{\PYGZgt{}} \PYG{n+nf}{replaceTerm}\PYG{o}{(}\PYG{n}{Protocol} \PYG{n}{prot}\PYG{o}{,} \PYG{n}{Nonce} \PYG{n}{message}\PYG{o}{);}
+\PYG{k+kd}{private} \PYG{n}{ArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{Term}\PYG{o}{\PYGZgt{}} \PYG{n+nf}{replaceTerm}\PYG{o}{(}\PYG{n}{Protocol} \PYG{n}{prot}\PYG{o}{,} \PYG{n}{CompoundTerm} \PYG{n}{message}\PYG{o}{,} \PYG{n}{Agent} \PYG{n}{to}\PYG{o}{,} \PYG{n}{Agent} \PYG{n}{from}\PYG{o}{);}
+\PYG{k+kd}{private} \PYG{n}{ArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{Term}\PYG{o}{\PYGZgt{}} \PYG{n+nf}{replaceTerm}\PYG{o}{(}\PYG{n}{Protocol} \PYG{n}{prot}\PYG{o}{,} \PYG{n}{EncryptedTerm} \PYG{n}{message}\PYG{o}{,} \PYG{n}{Agent} \PYG{n}{to}\PYG{o}{,} \PYG{n}{Agent} \PYG{n}{from}\PYG{o}{);}
+
+\PYG{k+kd}{private} \PYG{n}{ArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{Term}\PYG{o}{\PYGZgt{}} \PYG{n+nf}{replaceTerm}\PYG{o}{(}\PYG{n}{Protocol} \PYG{n}{prot}\PYG{o}{,} \PYG{n}{Nonce} \PYG{n}{message}\PYG{o}{)\PYGZob{}}
+
+    \PYG{n}{ArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{Term}\PYG{o}{\PYGZgt{}} \PYG{n}{result} \PYG{o}{=} \PYG{k}{new} \PYG{n}{ArrayList}\PYG{o}{\PYGZlt{}\PYGZgt{}();}
+
+    \PYG{n}{Nonce} \PYG{n}{generated} \PYG{o}{=} \PYG{k}{new} \PYG{n}{Nonce}\PYG{o}{(}\PYG{n}{message}\PYG{o}{.}\PYG{n+na}{getAgent}\PYG{o}{(),} \PYG{n}{message}\PYG{o}{.}\PYG{n+na}{getNr}\PYG{o}{(),} \PYG{n}{message}\PYG{o}{.}\PYG{n+na}{getProtocol}\PYG{o}{());}
+    \PYG{n}{generated}\PYG{o}{.}\PYG{n+na}{setIntruderGenerated}\PYG{o}{(}\PYG{k+kc}{true}\PYG{o}{);}
+    \PYG{n}{result}\PYG{o}{.}\PYG{n+na}{add}\PYG{o}{(}\PYG{n}{generated}\PYG{o}{);}
+
+    \PYG{k}{for}\PYG{o}{(}\PYG{n}{Term} \PYG{n}{auxTerm} \PYG{o}{:} \PYG{n}{getMassiveKnowledge}\PYG{o}{(}\PYG{n}{prot}\PYG{o}{))\PYGZob{}}
+
+        \PYG{k}{if}\PYG{o}{(!}\PYG{n}{message}\PYG{o}{.}\PYG{n+na}{equals}\PYG{o}{(}\PYG{n}{auxTerm}\PYG{o}{)} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{message}\PYG{o}{.}\PYG{n+na}{theSame}\PYG{o}{(}\PYG{n}{auxTerm}\PYG{o}{))\PYGZob{}}
+
+            \PYG{n}{result}\PYG{o}{.}\PYG{n+na}{add}\PYG{o}{(}\PYG{n}{auxTerm}\PYG{o}{);}
+            \PYG{k}{break}\PYG{o}{;}
+        \PYG{o}{\PYGZcb{}}
+    \PYG{o}{\PYGZcb{}}
+    \PYG{k}{return} \PYG{n}{result}\PYG{o}{;}
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

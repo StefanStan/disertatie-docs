@@ -1,0 +1,41 @@
+\select@language {romanian}
+\contentsline {chapter}{Introducere}{7}{chapter*.2}
+\contentsline {chapter}{Contribu\IeC {{\textcommabelow t}}ii}{8}{chapter*.3}
+\contentsline {chapter}{\numberline {1}Anonimitatea \IeC {\^\i }n contextul ascunderii de informa\IeC {{\textcommabelow t}}ii}{9}{chapter.1}
+\contentsline {section}{\numberline {1.1}Re\IeC {{\textcommabelow t}}ele de mix-uri}{9}{section.1.1}
+\contentsline {section}{\numberline {1.2}Re\IeC {{\textcommabelow t}}ele DC}{12}{section.1.2}
+\contentsline {chapter}{\numberline {2}Fundamente teoretice}{15}{chapter.2}
+\contentsline {section}{\numberline {2.1}Formatul unui protocol}{15}{section.2.1}
+\contentsline {section}{\numberline {2.2}Termi}{16}{section.2.2}
+\contentsline {section}{\numberline {2.3}Ac\IeC {\c t}iuni}{16}{section.2.3}
+\contentsline {section}{\numberline {2.4}Protocoale}{16}{section.2.4}
+\contentsline {chapter}{\numberline {3}Arhitectura aplica\IeC {\c t}iei}{19}{chapter.3}
+\contentsline {chapter}{\numberline {4}Transpunerea modelului \IeC {\^\i }n implementare}{22}{chapter.4}
+\contentsline {section}{\numberline {4.1}Modelare \IeC {\c s}i proiectare}{22}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}\IeC {\c S}ablonul de proiectare \textit {Composite}. Abstractizarea termilor}{22}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}\IeC {\c S}ablonul de proiectare \textit {Singleton}. Atacatorul}{24}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Definirea specifica\IeC {\c t}iei. Validarea sintactic\IeC {\u a} \IeC {\c s}i semantic\IeC {\u a}}{25}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Verificarea sintactic\IeC {\u a}}{25}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Verificarea semantic\IeC {\u a}}{27}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}\IeC {\^I}nc\IeC {\u a}rcarea unui protocol pornind de la o specifica\IeC {\c t}ie}{28}{section.4.3}
+\contentsline {section}{\numberline {4.4}Algoritmul de verificare a rezisten\IeC {{\textcommabelow t}}ei la un intrus activ}{29}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Pa\IeC {{\textcommabelow s}}ii preliminari algoritmului}{29}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Algoritmul de verificare a rezisten\IeC {{\textcommabelow t}}ei la un intrus activ}{31}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}Aflarea termilor cu care poate fi \IeC {\^\i }nlocuit un mesaj}{34}{subsection.4.4.3}
+\contentsline {chapter}{\numberline {5}Interfa\IeC {\c t}a grafic\IeC {\u a}}{36}{chapter.5}
+\contentsline {section}{\numberline {5.1}Editorul de specifica\IeC {{\textcommabelow t}}ii}{37}{section.5.1}
+\contentsline {section}{\numberline {5.2}Panoul de control}{38}{section.5.2}
+\contentsline {section}{\numberline {5.3}Fi\IeC {\c s}ierele de configurare}{38}{section.5.3}
+\contentsline {section}{\numberline {5.4}Colorarea sintactic\IeC {\u a}}{39}{section.5.4}
+\contentsline {chapter}{\numberline {6}Ghid de utilizare a aplica\IeC {\c t}iei}{40}{chapter.6}
+\contentsline {chapter}{\numberline {7}Protocoale de securitate}{42}{chapter.7}
+\contentsline {section}{\numberline {7.1}Un protocol vulnerabil la integritate \IeC {{\textcommabelow s}}i confiden\IeC {{\textcommabelow t}}ialitate}{42}{section.7.1}
+\contentsline {section}{\numberline {7.2}Un protocol vulnerabil la integritate}{43}{section.7.2}
+\contentsline {section}{\numberline {7.3}Un protocol vulnerabil la confiden\IeC {{\textcommabelow t}}ialitate}{44}{section.7.3}
+\contentsline {section}{\numberline {7.4}Un protocol sigur}{46}{section.7.4}
+\contentsline {section}{\numberline {7.5}Protocolul Needham-Schroeder, vulnerabil la confiden\IeC {{\textcommabelow t}}ialitate}{47}{section.7.5}
+\contentsline {section}{\numberline {7.6}Protocolul Needham-Schroeder-Lowe, sigur}{49}{section.7.6}
+\contentsline {section}{\numberline {7.7}Protocolul BAN modified Andrew Secure RPC, sigur}{51}{section.7.7}
+\contentsline {chapter}{\numberline {8}Direc\IeC {\c t}ii de dezvoltare viitoare}{53}{chapter.8}
+\contentsline {chapter}{Concluzii}{54}{chapter*.15}
+\contentsline {chapter}{Bibliografie}{55}{chapter*.16}

@@ -1,0 +1,63 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZlt{}?xml version=\PYGZdq{}1.0\PYGZdq{} encoding=\PYGZdq{}UTF\PYGZhy{}8\PYGZdq{}?\PYGZgt{}}
+\PYG{n+nt}{\PYGZlt{}project} \PYG{n+na}{xmlns=}\PYG{l+s}{\PYGZdq{}http://maven.apache.org/POM/4.0.0\PYGZdq{}}
+         \PYG{n+na}{xmlns:xsi=}\PYG{l+s}{\PYGZdq{}http://www.w3.org/2001/XMLSchema\PYGZhy{}instance\PYGZdq{}}
+         \PYG{n+na}{xsi:schemaLocation=}\PYG{l+s}{\PYGZdq{}http://maven.apache.org/POM/4.0.0}
+\PYG{l+s}{		 http://maven.apache.org/xsd/maven\PYGZhy{}4.0.0.xsd\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}
+    \PYG{n+nt}{\PYGZlt{}modelVersion\PYGZgt{}}4.0.0\PYG{n+nt}{\PYGZlt{}/modelVersion\PYGZgt{}}
+
+    \PYG{n+nt}{\PYGZlt{}parent\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}groupId\PYGZgt{}}org.springframework.boot\PYG{n+nt}{\PYGZlt{}/groupId\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}artifactId\PYGZgt{}}spring\PYGZhy{}boot\PYGZhy{}starter\PYGZhy{}parent\PYG{n+nt}{\PYGZlt{}/artifactId\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}version\PYGZgt{}}1.5.2.RELEASE\PYG{n+nt}{\PYGZlt{}/version\PYGZgt{}}
+    \PYG{n+nt}{\PYGZlt{}/parent\PYGZgt{}}
+
+    \PYG{n+nt}{\PYGZlt{}groupId\PYGZgt{}}ro.stefanstan.apps\PYG{n+nt}{\PYGZlt{}/groupId\PYGZgt{}}
+    \PYG{n+nt}{\PYGZlt{}artifactId\PYGZgt{}}pgApp\PYG{n+nt}{\PYGZlt{}/artifactId\PYGZgt{}}
+    \PYG{n+nt}{\PYGZlt{}version\PYGZgt{}}1.0.0.1\PYGZhy{}SNAPSHOT\PYG{n+nt}{\PYGZlt{}/version\PYGZgt{}}
+    \PYG{n+nt}{\PYGZlt{}packaging\PYGZgt{}}jar\PYG{n+nt}{\PYGZlt{}/packaging\PYGZgt{}}
+
+    \PYG{n+nt}{\PYGZlt{}properties\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}java.version\PYGZgt{}}1.8\PYG{n+nt}{\PYGZlt{}/java.version\PYGZgt{}}
+    \PYG{n+nt}{\PYGZlt{}/properties\PYGZgt{}}
+
+    \PYG{n+nt}{\PYGZlt{}dependencies\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}dependency\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}groupId\PYGZgt{}}org.springframework.boot\PYG{n+nt}{\PYGZlt{}/groupId\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}artifactId\PYGZgt{}}spring\PYGZhy{}boot\PYGZhy{}starter\PYGZhy{}web\PYG{n+nt}{\PYGZlt{}/artifactId\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}/dependency\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}dependency\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}groupId\PYGZgt{}}org.springframework.boot\PYG{n+nt}{\PYGZlt{}/groupId\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}artifactId\PYGZgt{}}spring\PYGZhy{}boot\PYGZhy{}starter\PYGZhy{}test\PYG{n+nt}{\PYGZlt{}/artifactId\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}scope\PYGZgt{}}test\PYG{n+nt}{\PYGZlt{}/scope\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}/dependency\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}dependency\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}groupId\PYGZgt{}}com.jayway.jsonpath\PYG{n+nt}{\PYGZlt{}/groupId\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}artifactId\PYGZgt{}}json\PYGZhy{}path\PYG{n+nt}{\PYGZlt{}/artifactId\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}scope\PYGZgt{}}test\PYG{n+nt}{\PYGZlt{}/scope\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}/dependency\PYGZgt{}}
+    \PYG{n+nt}{\PYGZlt{}/dependencies\PYGZgt{}}
+
+    \PYG{n+nt}{\PYGZlt{}build\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}plugins\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}plugin\PYGZgt{}}
+                \PYG{n+nt}{\PYGZlt{}groupId\PYGZgt{}}org.springframework.boot\PYG{n+nt}{\PYGZlt{}/groupId\PYGZgt{}}
+                \PYG{n+nt}{\PYGZlt{}artifactId\PYGZgt{}}spring\PYGZhy{}boot\PYGZhy{}maven\PYGZhy{}plugin\PYG{n+nt}{\PYGZlt{}/artifactId\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}/plugin\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}/plugins\PYGZgt{}}
+    \PYG{n+nt}{\PYGZlt{}/build\PYGZgt{}}
+
+    \PYG{n+nt}{\PYGZlt{}repositories\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}repository\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}id\PYGZgt{}}spring\PYGZhy{}releases\PYG{n+nt}{\PYGZlt{}/id\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}url\PYGZgt{}}https://repo.spring.io/libs\PYGZhy{}release\PYG{n+nt}{\PYGZlt{}/url\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}/repository\PYGZgt{}}
+    \PYG{n+nt}{\PYGZlt{}/repositories\PYGZgt{}}
+    \PYG{n+nt}{\PYGZlt{}pluginRepositories\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}pluginRepository\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}id\PYGZgt{}}spring\PYGZhy{}releases\PYG{n+nt}{\PYGZlt{}/id\PYGZgt{}}
+            \PYG{n+nt}{\PYGZlt{}url\PYGZgt{}}https://repo.spring.io/libs\PYGZhy{}release\PYG{n+nt}{\PYGZlt{}/url\PYGZgt{}}
+        \PYG{n+nt}{\PYGZlt{}/pluginRepository\PYGZgt{}}
+    \PYG{n+nt}{\PYGZlt{}/pluginRepositories\PYGZgt{}}
+\PYG{n+nt}{\PYGZlt{}/project\PYGZgt{}}
+\end{Verbatim}

@@ -1,0 +1,100 @@
+yum install -y net-tools
+yum install -y wget
+yum install -y vim
+yum install -y telnet
+yum install -y gcc
+yum install -y gdisk
+
+cd /opt/
+wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/jdk-8u121-linux-x64.tar.gz"
+
+curl 'http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz?AuthParam=1497000137_8f6f6925902eb0e1086330c9567834f2' -H 'Host: download.oracle.com' -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' -H 'Accept-Encoding: gzip, deflate' -H 'DNT: 1' -H 'Referer: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html' -H 'Cookie: ELOQUA=GUID=99c3478b66ae405eb2b1c4d7f08fe32c; atgRecVisitorId=10EBuV2UC0UuUzkrbPj4MvGIW8PnW8bxcFri6sWyEUEk7qs1412; s_nr=1494437338186; s_cc=true; gpw_e24=http%3A%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdownloads%2Fjdk8-downloads-2133151.html; s_sq=%5B%5BB%5D%5D; mmapi.store.p.0=%7B%22mmparams.d%22%3A%7B%7D%2C%22mmparams.p%22%3A%7B%22pd%22%3A%221528535977588%7C%5C%22-664165091%7CAwAAAApVAgAWN2h%2B5A4AARAAAUJyhWp9AQByGrCmGK%2FUSPDKXJsYr9RIAAAAAJIAAAD%2F%2F%2F%2F%2FAA13d3cuZ29vZ2xlLnJvBOQOAQAAAAAAAAAAAP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwAAAAAAAAABRQ%3D%3D%5C%22%22%2C%22srv%22%3A%221528535977589%7C%5C%22fravwcgus01%5C%22%22%7D%7D; mmapi.store.s.0=%7B%22mmparams.d%22%3A%7B%7D%2C%22mmparams.p%22%3A%7B%7D%7D; oraclelicense=accept-securebackup-cookie' -H 'Connection: keep-alive' > jdk-8u131-linux-x64.tar.gz
+
+tar xzf jdk-8u121-linux-x64.tar.gz
+tar xfz jdk-8u131-linux-x64.tar.gz
+
+cd jdk1.8.0_121/
+cd jdk1.8.0_131/
+
+alternatives --install /usr/bin/java java /opt/jdk1.8.0_131/bin/java 2
+alternatives --install /usr/bin/jar jar /opt/jdk1.8.0_131/bin/jar 2
+alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_131/bin/javac 2
+alternatives --set java /opt/jdk1.8.0_131/bin/java
+alternatives --set javac /opt/jdk1.8.0_131/bin/javac
+alternatives --set jar /opt/jdk1.8.0_131/bin/jar
+
+
+-- TO DO: run this foreach user
+export JAVA_HOME=/opt/jdk1.8.0_131
+export JRE_HOME=/opt/jdk1.8.0_131/jre
+export PATH=$PATH:/opt/jdk1.8.0_131/bin:/opt/jdk1.8.0_131/jre/bin
+
+echo 'export JAVA_HOME="/opt/jdk1.8.0_131"' >> $HOME/.bash_profile
+echo 'export JRE_HOME="/opt/jdk1.8.0_131/jre"' >> $HOME/.bash_profile
+
+-- install POSTGRES ROOT
+yum install -y http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-redhat95-9.5-2.noarch.rpm
+yum install -y postgresql95-server postgresql95-contrib
+
+-- foreach tenant
+	/usr/lib64/pgsql95/bin/initdb -D /pgdata/lv-pgdata-1
+	/usr/lib64/pgsql95/bin/initdb -D /pgdata/lv-pgdata-2
+	/usr/lib64/pgsql95/bin/initdb -D /pgdata/lv-pgdata-3
+
+cd /home/postgres
+-- create pg-script in /home/postgres
+
+-- foreach tenant
+	-- create symbolic links with name of tenants
+	ln -s pg-script lv-pgdata-1
+	ln -s pg-script lv-pgdata-2
+	ln -s pg-script lv-pgdata-3
+
+	-- modify $PGDATA/postgresql.conf and enable listener_address="*"
+	-- enter in $PGDATA/pg_hba.conf and add 
+	host    all             all             0.0.0.0/0               password
+
+
+DO STUFF IN CONFIGS
+
+# to interact with servers
+/home/ec2-user/disertatie/server/lv-pgdata-1 start
+/home/ec2-user/disertatie/server/lv-pgdata-2 status
+/home/ec2-user/disertatie/server/lv-pgdata-3 stop
+
+# to create a base backup 
+/home/ec2-user/disertatie/basebackup/lv-pgdata-1 127.0.0.1 54321
+/home/ec2-user/disertatie/basebackup/lv-pgdata-2 127.0.0.1 54322
+/home/ec2-user/disertatie/basebackup/lv-pgdata-3 127.0.0.1 54323
+
+# to return to point in time
+/home/ec2-user/disertatie/recovery/lv-pgdata-1 "2017-06-05 14:00:00 EEST" true
+/home/ec2-user/disertatie/recovery/lv-pgdata-2 "2017-06-05 14:00:00 EEST" true
+/home/ec2-user/disertatie/recovery/lv-pgdata-3 "2017-06-05 14:00:00 EEST" true
+
+
+
+
+# curl examples  
+# to interact with servers
+curl -X GET http://localhost:12345/pgapp/server
+curl --data "dbServerName=lv-pgdata-1&action=start" -X POST http://localhost:12345/pgapp/server
+curl --data "dbServerName=lv-pgdata-1&action=status" -X POST http://localhost:12345/pgapp/server
+curl --data "dbServerName=lv-pgdata-1&action=stop" -X POST http://localhost:12345/pgapp/server
+
+# to create a base backup
+curl --data "dbServerName=lv-pgdata-1&ip=127.0.0.1&port=54321" -X POST http://localhost:12345/pgapp/basebackup
+curl --data "dbServerName=lv-pgdata-2&ip=127.0.0.1&port=54322" -X POST http://localhost:12345/pgapp/basebackup
+curl --data "dbServerName=lv-pgdata-3&ip=127.0.0.1&port=54323" -X POST http://localhost:12345/pgapp/basebackup
+
+# to return to point in time
+# to create a base backup
+curl --data "dbServerName=lv-pgdata-1&dateTime=2017-06-05 14:00:00 EEST" -X POST http://localhost:12345/pgapp/basebackup
+curl --data "dbServerName=lv-pgdata-2&dateTime=2017-06-05 14:00:00 EEST" -X POST http://localhost:12345/pgapp/basebackup
+curl --data "dbServerName=lv-pgdata-3&dateTime=2017-06-05 14:00:00 EEST" -X POST http://localhost:12345/pgapp/basebackup
+
+
+nohup java -jar pgApp-1.0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
+sh -c "nohup npm start > /dev/null 2>&1 &"
+
+http://ec2-54-200-208-222.us-west-2.compute.amazonaws.com:3001/pgapp
