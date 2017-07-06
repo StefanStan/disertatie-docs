@@ -1,60 +1,58 @@
-\beamer@endinputifotherversion {3.36pt}
 \headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
 \headcommand {\beamer@framepages {2}{2}}
-\headcommand {\sectionentry {1}{Introducere}{3}{Introducere}{0}}
+\headcommand {\sectionentry {1}{Introduction}{3}{Introduction}{0}}
 \headcommand {\beamer@sectionpages {1}{2}}
 \headcommand {\beamer@subsectionpages {1}{2}}
-\headcommand {\beamer@subsectionentry {0}{1}{1}{3}{Cuvinte cheie}}\headcommand {\beamer@subsectionpages {3}{2}}
-\headcommand {\slideentry {1}{1}{1}{3/3}{Cuvinte cheie}{0}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{3}{Keywords}}\headcommand {\beamer@subsectionpages {3}{2}}
+\headcommand {\slideentry {1}{1}{1}{3/3}{Keywords}{0}}
 \headcommand {\beamer@framepages {3}{3}}
-\headcommand {\beamer@subsectionentry {0}{1}{2}{4}{Obiective}}\headcommand {\beamer@subsectionpages {3}{3}}
-\headcommand {\slideentry {1}{2}{1}{4/4}{Obiective}{0}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{4}{Obiectives}}\headcommand {\beamer@subsectionpages {3}{3}}
+\headcommand {\slideentry {1}{2}{1}{4/4}{Obiectives}{0}}
 \headcommand {\beamer@framepages {4}{4}}
-\headcommand {\beamer@subsectionentry {0}{1}{3}{5}{Aplica\IeC {{\textcommabelow t}}ii similare}}\headcommand {\beamer@subsectionpages {4}{4}}
-\headcommand {\slideentry {1}{3}{1}{5/5}{Aplica\IeC {{\textcommabelow t}}ii similare}{0}}
+\headcommand {\sectionentry {2}{Studies}{5}{Studies}{0}}
+\headcommand {\beamer@sectionpages {3}{4}}
+\headcommand {\beamer@subsectionpages {4}{4}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{5}{Point in time recovery}}\headcommand {\beamer@subsectionpages {5}{4}}
+\headcommand {\slideentry {2}{1}{1}{5/5}{Point in time recovery}{0}}
 \headcommand {\beamer@framepages {5}{5}}
-\headcommand {\sectionentry {2}{Modelare Teoretic\IeC {\u a}}{6}{Modelare Teoretic\IeC {\u a}}{0}}
-\headcommand {\beamer@sectionpages {3}{5}}
-\headcommand {\beamer@subsectionpages {5}{5}}
-\headcommand {\beamer@subsectionentry {0}{2}{1}{6}{Sursa de inspira\IeC {{\textcommabelow t}}ie}}\headcommand {\beamer@subsectionpages {6}{5}}
-\headcommand {\slideentry {2}{1}{1}{6/6}{Sursa de inspira\IeC {{\textcommabelow t}}ie}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{6}{Logical Volumes Management}}\headcommand {\beamer@subsectionpages {5}{5}}
+\headcommand {\slideentry {2}{2}{1}{6/6}{Logical Volumes Management}{0}}
 \headcommand {\beamer@framepages {6}{6}}
-\headcommand {\beamer@subsectionentry {0}{2}{2}{7}{Protocoale de securitate}}\headcommand {\beamer@subsectionpages {6}{6}}
-\headcommand {\slideentry {2}{2}{1}{7/7}{Protocoale de securitate}{0}}
+\headcommand {\sectionentry {3}{Implementation}{7}{Implementation}{0}}
+\headcommand {\beamer@sectionpages {5}{6}}
+\headcommand {\beamer@subsectionpages {6}{6}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{7}{Logical volumes architecture}}\headcommand {\beamer@subsectionpages {7}{6}}
+\headcommand {\slideentry {3}{1}{1}{7/7}{Logical volumes architecture}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\sectionentry {3}{Implementare}{8}{Implementare}{0}}
-\headcommand {\beamer@sectionpages {6}{7}}
-\headcommand {\beamer@subsectionpages {7}{7}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{8}{Arhitectura aplica\IeC {{\textcommabelow t}}iei}}\headcommand {\beamer@subsectionpages {8}{7}}
-\headcommand {\slideentry {3}{1}{1}{8/8}{Arhitectura aplica\IeC {{\textcommabelow t}}iei}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{8}{System architecture}}\headcommand {\beamer@subsectionpages {7}{7}}
+\headcommand {\slideentry {3}{2}{1}{8/8}{System architecture}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\beamer@subsectionentry {0}{3}{2}{9}{Descrierea unui protocol}}\headcommand {\beamer@subsectionpages {8}{8}}
-\headcommand {\slideentry {3}{2}{1}{9/9}{Descrierea unui protocol}{0}}
+\headcommand {\slideentry {3}{2}{2}{9/9}{System architecture}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\sectionentry {4}{Exemplu de rulare}{10}{Exemplu de rulare}{0}}
-\headcommand {\beamer@sectionpages {8}{9}}
-\headcommand {\beamer@subsectionpages {9}{9}}
-\headcommand {\slideentry {4}{0}{2}{10/10}{}{0}}
+\headcommand {\sectionentry {4}{Use Cases}{10}{Use Cases}{0}}
+\headcommand {\beamer@sectionpages {7}{9}}
+\headcommand {\beamer@subsectionpages {8}{9}}
+\headcommand {\slideentry {4}{0}{1}{10/10}{}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{11}{Rulare - Security Protocols Checker}}\headcommand {\beamer@subsectionpages {10}{10}}
-\headcommand {\slideentry {4}{1}{1}{11/11}{Rulare - Security Protocols Checker}{0}}
+\headcommand {\sectionentry {5}{Future dev}{11}{Future dev}{0}}
+\headcommand {\beamer@sectionpages {10}{10}}
+\headcommand {\beamer@subsectionpages {10}{10}}
+\headcommand {\slideentry {5}{0}{1}{11/11}{}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\slideentry {4}{1}{2}{12/12}{Rulare - Security Protocols Checker}{0}}
+\headcommand {\sectionentry {6}{Conclusions}{12}{Conclusions}{0}}
+\headcommand {\beamer@sectionpages {11}{11}}
+\headcommand {\beamer@subsectionpages {11}{11}}
+\headcommand {\slideentry {6}{0}{1}{12/12}{}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{13}{Rulare - Scyther}}\headcommand {\beamer@subsectionpages {11}{12}}
-\headcommand {\slideentry {4}{2}{1}{13/13}{Rulare - Scyther}{0}}
+\headcommand {\sectionentry {7}{Bibliography}{13}{Bibliography}{0}}
+\headcommand {\beamer@sectionpages {12}{12}}
+\headcommand {\beamer@subsectionpages {12}{12}}
+\headcommand {\slideentry {7}{0}{1}{13/13}{}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\slideentry {4}{2}{2}{14/14}{Rulare - Scyther}{0}}
-\headcommand {\beamer@framepages {14}{14}}
-\headcommand {\sectionentry {5}{Concluzii}{15}{Concluzii}{0}}
-\headcommand {\beamer@sectionpages {10}{14}}
-\headcommand {\beamer@subsectionpages {13}{14}}
-\headcommand {\slideentry {5}{0}{3}{15/15}{}{0}}
-\headcommand {\beamer@framepages {15}{15}}
-\headcommand {\beamer@partpages {1}{15}}
-\headcommand {\beamer@subsectionpages {15}{15}}
-\headcommand {\beamer@sectionpages {15}{15}}
-\headcommand {\beamer@documentpages {15}}
-\headcommand {\def \inserttotalframenumber {15}}
+\headcommand {\beamer@partpages {1}{13}}
+\headcommand {\beamer@subsectionpages {13}{13}}
+\headcommand {\beamer@sectionpages {13}{13}}
+\headcommand {\beamer@documentpages {13}}
+\headcommand {\def \inserttotalframenumber {13}}

@@ -25,11 +25,19 @@
 
 \logo{\includegraphics[width=0.8cm]{KULogo}}
 %\useoutertheme{infolines} 
-\title{Security Protocols Checker}
-\author{\textbf{Autor}\newline Ștefan Stan}
+\title{A study on point in time recovery \\ on relational databases}
+\author{\textbf{Author}\newline Ștefan Stan}
 %\textbf{Coordonator științific} \newline Lect. dr. Cosmin-Nicolae Vârlan
-\institute{\normalsize \textbf{Coordonator științific} \newline Lect. dr. Cosmin-Nicolae Vârlan \newline \newline \small Facultatea de Informatică\\ Universitatea Alexandru Ioan Cuza din Iași}
-\date{3 Iulie 2015}
+\institute{
+	\normalsize \textbf{Scientific Coordinator}
+	\newline Lect. dr. Cristian Frăsinaru
+	\newline
+	\normalsize \textbf{Company Supervisor}
+	\newline DevOps Engineer Gabi Ichim, TSS-Yonder
+	\\
+	\vspace{0.1cm}
+	\small Faculty of Computer Science\\ University Alexandru Ioan Cuza from Iași}
+\date{6 July 2017}
 
 \begin{document}
 \frame{\titlepage \vspace{-0.5cm}
@@ -37,348 +45,162 @@
 
 \frame
 {
-\frametitle{Cuprins}
+\frametitle{Table of contents}
 \tableofcontents
 }
 
-\section{Introducere}
+\section{Introduction}
 
 \Large
-\subsection{Cuvinte cheie}
+\subsection{Keywords}
 
 \frame{
-\frametitle{Cuvinte cheie}
+\frametitle{Keywords}
 \begin{center}
 \textcolor{kugreen}{
-protocol de securitate, model checking,\\ integritate, confidențialitate,\\
-Java, analiză sintactică, analiză semantică}
+checkpoint, recovery, point in time,\\
+database, logical volume, UNIX scripts,\\
+RESTful, API, cloud, Amazon Web Service}
 \end{center}
 }
 \normalsize
 
-\subsection{Obiective}
+\subsection{Obiectives}
 
 \frame{
-\frametitle{Obiective}
+\frametitle{Obiectives}
 \begin{itemize}
-\item definirea, încărcarea în memorie și rularea protocoalelor de securitate descrise la nivel teoretic;
-\item verificarea automată a proprietăților de securitate:
-\begin{itemize}
-\vspace{0.1cm}
-\item \textbf{Integritate}
-\\
-protecția informației spre a nu fi \textbf{modificată} de către surse neautorizate;
+\item \textcolor{kugreen}{\textit{study}} the way relational databases (ex. PostgreSQL) manages transactions;
 \vspace{0.3cm}
-\item \textbf{Confidențialitate}
-\\
-protecția informației spre a nu fi \textbf{accesată} de către surse neautorizate.
-\end{itemize}
-\end{itemize}
-}
-
-\subsection{Aplicații similare}
-
-\frame{
-\frametitle{Aplicații similare}
-\textbf{Scyther}
-\newline
-\begin{itemize}
-\item Cas Cremers - \textit{Scyther - Semantics and Verification of Security Protocols}
-\vspace{0.15cm}
-\item Verifică \textbf{integritatea} și \textbf{confidențialitatea} unei instanțe de protocol
-\vspace{0.15cm}
-\item Arată atacurile posibile în manieră grafică
+\item \textcolor{kugreen}{\textit{study}} and find a way to use PostgreSQL logging to create a management mechanism of the database changes;
+\vspace{0.3cm}
+\item \textcolor{kugreen}{\textit{create}} a tool that enables a user to restore a database instance state to one in a specific point in time;
+\vspace{0.3cm}
+\item \textcolor{kugreen}{\textit{investigate}} the possibilities and find a solution to \textcolor{kugreen}{\textit{facilitate}} usage of previously created tool to persons without UNIX/ PostgreSQL specific knowledge.
 \end{itemize}
 }
 
-\section{Modelare Teoretică}
+\section{Studies}
 
-\subsection{Sursa de inspirație}
+\subsection{Point in time recovery}
 \frame{
-\frametitle{Sursa de inspirație}
-
-\begin{columns}
-\column{0.62\textwidth}
-
-\small
-\textbf{Reasoning about minimal anonymity in security protocols}
-\newline
-\newline
-Autori:
-\begin{itemize}
-\item Prof. dr. Ferucio Laurenţiu Ţiplea
-\item Lect. dr. Cosmin Vârlan
-\item Loredana Vamanu
-\end{itemize}
-\column{0.45\textwidth}
-\begin{figure}
-\includegraphics[scale=0.11]{FGCS}
-\end{figure}
-
-\end{columns}
-
-%\vspace{3cm}
+\frametitle{Studies - Point in time recovery}
+\hspace{0.5cm}\textcolor{kugreen}{Basebackup}\\
+\hspace{1cm} - checkpoint from which it can be started the point in time recovery\\
+\vspace{0.3cm}
+\hspace{0.5cm}\textcolor{kugreen}{Write Ahead Logs (WALs)}\\
+\hspace{1cm} - binary sequences that PostgreSQL generates to keep its logging (information about transactions)\\
+\vspace{0.3cm}
+\hspace{0.5cm}\textcolor{kugreen}{Point in time recovery (PITR)}\\
+\hspace{1cm} - the process of changing a database current state to one at a specific point in time, given as input.\\
 }
 
-\subsection{Protocoale de securitate}
+\subsection{Logical Volumes Management}
 \frame{
-\frametitle{Protocoale de securitate}
-\par
-\textcolor{kugreen}{Signatura unui protocol - $\mathcal{S = (A, K, N)}$}
-\vspace{0.125cm}
-\newline
-$\mathcal{A}$ - mulțime finită de \textit{agenţi}; include \textit{intrusul} - \textit{I}
-\newline
-$\mathcal{K}$, $\mathcal{N}$ - două mulţimi cel mult numărabile de \textit{chei} şi, respectiv, \textit{nonce}-uri.
-\vspace{0.6cm}
-\newline
-\textcolor{kugreen}{Termi}
-\vspace{0.125cm}
-\newline
-$\mathcal{T}_{0}$ = $\mathcal{A}$ $\cup$ $\mathcal{K}$ $\cup$ $\mathcal{N}$ - Mulţimea termilor de bază
-\newline
-Mulţimea $\mathcal{T}$ a termilor este definită inductiv:
-\setbeamertemplate{itemize items}[triangle]
-\begin{itemize}
-  \item $\mathcal{T}_{0}$ $\in$ $\mathcal{T}$;
-  \item t$_{1}$, t$_{2}$ $\in$ $\mathcal{T}$ $\Rightarrow$ (\textit{t$_{1}$}, \textit{t$_{2}$}) $\in$ $\mathcal{T}$;
-  \\ (\textit{t$_{1}$}, ..., \textit{t$_{n}$}) = ((\textit{t$_{1}$}, ..., \textit{t$_{n-1}$}) \textit{t$_{n}$}) $\Rightarrow$ (\textit{t$_{1}$}, ..., \textit{t$_{n}$}) $\in$ $\mathcal{T}$, n$\geq$3; 
-  \item \textit{t} $\in$ $\mathcal{T}$, \textit{K} $\in$ $\mathcal{K}$ $\Rightarrow$ \{\textit{t}\}\textsubscript{\textit{K}} $\in$ $\mathcal{T}$;
-  \end{itemize}
+\frametitle{Studies - Logical Volumes Management (LVM)}
+\hspace{0.5cm}\textcolor{kugreen}{Advantages:}\\
+\hspace{1cm} - flexible "disks" called logical volumes (no longer depend on physical space of harddisks )\\
+\hspace{1cm} - abstraction layer above storage units\\
+\vspace{0.3cm}
+\hspace{0.5cm}\textcolor{kugreen}{Physical volume (PV)} - a partition with LVM metadata asociated.\\
+\hspace{0.5cm}\textcolor{kugreen}{Volume Group (VG)} - a way of organizing physical volumes to enable subdivisions and their management.\\
+\hspace{0.5cm}\textcolor{kugreen}{Logical Volume (LV)} - a subdivision of a volume group, which may has its space allocated from different physical volumes.\\
 }
 
-\section{Implementare}
+\section{Implementation}
 
-\subsection{Arhitectura aplicației}
+\subsection{Logical volumes architecture}
 
 \frame{
-\frametitle{Arhitectura aplicației}
+\frametitle{Implementation - Logical volumes architecture}
 \begin{figure}[h]
 	\centering
-    \includegraphics[scale=0.3]{diagram}
+    \includegraphics[scale=0.23]{LVM}
 \end{figure}
 }
 
-\subsection{Descrierea unui protocol}
+\subsection{System architecture}
 
 \frame{
-\frametitle{Descrierea unui protocol}
-\textcolor{kugreen}{\textbf{Definirea specificației}}
-\vspace{0.075cm}
-\\
-agent$_{1}$ : IK { info$_{11}$, $\ldots$, info$_{1m}$}
-\\
-$\ldots$
-\\
-agent$_{n}$ : IK { info$_{n1}$, $\ldots$, info$_{np}$}
-\vspace{0.18cm}
-\\
-acțiune$_{1}$
-\\
-$\ldots$
-\\
-acțiune$_{k}$
-\vspace{0.18cm}
-\\
-\textcolor{kugreen}{\textbf{Informație}}
-\vspace{0.075cm}
-\\
-agent$\vert$ticket$\vert$nonce$\vert$cheie
-\vspace{0.18cm}
-\\
-\textcolor{kugreen}{\textbf{Acțiune}}
-\vspace{0.075cm}
-\\
-agent$_{1}$ ! agent$_{2}$ : (termiGenerați) mesaj
-\\
-agent$_{1}$ ? agent$_{2}$ : mesaj
-}
-\iffalse
-\subsection{Funcționalități importante}
-
-\frame{
-\frametitle{Funcționalități importante}
-\textbf{Verificarea sintactică} este realizată de un analizator sintactic descendent generat de utilitarul Java Compiler Compiler. Acesta folosește o gramatică \textbf{\textit{LL(k)}} ce descrie limbajul dorit.
-\vspace{0.25cm}
-\\
-\textbf{Verificarea semantică} se folosește pentru a valida cunoștințele agenților (cheile publice cunoscute de toți agenții, cheile private doar de agentul descris de cheie etc.).
-\vspace{0.25cm}
-\\
-\textbf{Colorarea sintactică} a specificației - împărțirea în tokeni și colorarea conform fișierului de configurare \texttt{colors.css}.
-\vspace{0.25cm}
-}
-
-\subsection{Algoritmul de verificare}
-
-\frame{
-\frametitle{Verificarea proprietăților de securitate}
-\textbf{Identitatea instanțelor clasei \texttt{Term}}
-\\
-Metodele \texttt{theSame()} și \texttt{equals()}.
-\vspace{0.375cm}
-\\
-\textbf{Metode de atac}
-\\
-Atacatorul poate modifica un mesaj transmis între doi agenți. Metoda \texttt{replaceMessage()} a clasei \texttt{Intruder}.
-\vspace{0.375cm}
-\\
-\textbf{Algoritmul de verificare}
-\begin{itemize}
-\item Crearea și rularea instanței ajutătoare;
-\item Crearea instanței de test;
-\item Rularea algoritmului de verificare pe instanța de test.
-\end{itemize}
-}
-
-\subsection{Modelare și proiectare}
-
-\frame{
-\frametitle{Șabloane de proiectare}
-\pause
-\textbf{Composite}
-\\
-Orice term de bază este term și orice term compus este term. Termii compuși sunt reprezentați prin intermediul unor structuri arborescente care pot fi manevrate la fel ca și termii de bază.
-\vspace{0.375cm}
-\\
-\pause
-\textbf{Singleton}
-\\
-Existența, la un moment dat, a unui singur atacator, accesibil de oriunde.
-\vspace{0.375cm}
-\\
-\pause
-\textbf{Model-View-Controller}
-\\
-Aplicația a fost împărțită în module ușor manevrabile și la care se putea lucra într-un mod independent.
-}
-\fi
-
-
-\section{Exemplu de rulare}
-
-\frame{
-\frametitle{Descrierea specificației protocolului}
-\hspace{3.2cm}
-Specificație protocol:
-\vspace{0.5cm}
-\\
-\hspace{2.7cm}
-\textit{A} ! \textit{B} \hspace{1.3 mm}: (\{\textit{N}\textsubscript{1\textsubscript{A}}\}) \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{B}\\
-\vspace{0.15cm}
-\hspace{2.7cm}
-\textit{B} ? \textit{A} : \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{B}\\
-\vspace{0.15cm}
-\hspace{2.7cm}
-\textit{B} ! \textit{A} \hspace{1.3 mm}: \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{A}\\
-\vspace{0.15cm}
-\hspace{2.7cm}
-\textit{A} ? \textit{B} : \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{A}
-}
-
-\subsection{Rulare - Security Protocols Checker}
-\frame{
-\frametitle{Rulare - Security Protocols Checker}
-
-Agenți comuni celor două instanțe de protocol: \textit{B}
-\newline
-\begin{Parallel}[v]{0.48\textwidth}{0.48\textwidth}
-\ParallelLText{\noindent
-------------Instanța 1------------\newline 
-\newline 
-\textit{A} ! \textit{B} \hspace{1.3 mm}: (\{\textit{N}\textsubscript{1\textsubscript{A}}\}) \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{B}\newline 
-\textit{A} generated \{\textit{N}\textsubscript{1\textsubscript{A}}\} for \textit{B}\newline 
-\textit{A} sent \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{B} to \textit{B}\newline 
-\textit{I} received \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{B}\newline 
-\newline 
-\newline
-\newline
-\newline
-\textit{B} ? \textit{A} : \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{B}\newline 
-\textit{B} received \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{B} from \textit{A}\newline 
-\textit{B} received \textit{N}\textsubscript{1\textsubscript{A}} from \textit{A}\newline 
-\newline 
-}
-\ParallelRText{\noindent
-------------Instanța 2------------\newline 
-\newline 
-\textit{I}!\textit{B}:\{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{B}\newline 
-I trimite același mesaj care s-a trimis în instanța numărul 1, în aceeași acțiune.\newline 
-                Deoarece mai tarziu va descoperi [\textit{N}\textsubscript{1\textsubscript{A}}] din cealaltă instanță de protocol\newline 
-\newline\textit{B}?\textit{I}:\{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{B}\newline 
-\textit{B} received \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{B} from \textit{I}\newline 
-\textit{B} received \textit{N}\textsubscript{1\textsubscript{A}} from \textit{I}\newline 
-}
-\ParallelPar
-\end{Parallel}
-}
-
-\frame{
-\frametitle{Rulare - Security Protocols Checker}
-
-\begin{Parallel}[v]{0.48\textwidth}{0.48\textwidth}
-\ParallelLText{\noindent
-\newline
-\textit{B} ! \textit{A} \hspace{1.3 mm}: \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{A}\newline 
-\textit{B} sent \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{A} to \textit{A}\newline 
-\textit{I} received \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{A}\newline 
-\newline 
-\textit{A} ? \textit{B} : \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{A}\newline 
-\textit{A} received \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{A} from \textit{B}\newline 
-\textit{A} received \textit{N}\textsubscript{1\textsubscript{A}} from \textit{B}\newline 
-\newline 
-}
-\ParallelRText{\noindent
-\newline
-\textit{B}!\textit{I}:\{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{I}\newline 
-\textit{B} sent \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{I} to \textit{I}\newline 
-\textit{I} received \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{I}\newline 
-\newline\textit{I}?\textit{B}:\{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{I}\newline 
-\textit{I} received \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{I} from \textit{B}\newline 
-\textcolor{red}{\textit{I} received \textit{N}\textsubscript{1\textsubscript{A}} from \textit{B}}\newline 
-\newline
-}
-\ParallelPar
-\end{Parallel}
-}
-
-\subsection{Rulare - Scyther}
-
-\frame{
-\frametitle{Rulare - Scyther}
+\frametitle{Implementation - System architecture}
 \begin{figure}[h]
 	\centering
-    \includegraphics[scale=0.325]{little}
+    \includegraphics[scale=0.195]{LayeredArchLandscape}
 \end{figure}
 }
 
 \frame{
-\frametitle{Corectarea specificației}
-\hspace{3.2cm}
-Specificație corectă:
-\vspace{0.5cm}
-\\
-\hspace{2.7cm}
-\textit{A} ! \textit{B} \hspace{1.3 mm}: (\{\textit{N}\textsubscript{1\textsubscript{A}}\}) \{\textcolor{red}{A},\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{B}\\
-\vspace{0.15cm}
-\hspace{2.7cm}
-\textit{B} ? \textit{A} : \{\textcolor{red}{A},\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{B}\\
-\vspace{0.15cm}
-\hspace{2.7cm}
-\textit{B} ! \textit{A} \hspace{1.3 mm}: \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{A}\\
-\vspace{0.15cm}
-\hspace{2.7cm}
-\textit{A} ? \textit{B} : \{\textit{N}\textsubscript{1\textsubscript{A}}\}\textit{K}\rlap{\textsuperscript{\textit{e}}}\textsubscript{A}
+\frametitle{Deployment - Amazon Web Services (AWS)}
+\hspace{0.5cm}\textcolor{kugreen}{Advantages:}\\
+\vspace{0.1cm}
+\hspace{1cm} - simulate a production environment;\\
+\vspace{0.1cm}
+\hspace{1cm} - physical volumes used in LVM architecture are provided by EBS (Elastic Block Storage) service which guarantees data guarantees availability in case of disaster by using replication in 3 different data centers;\\
+\vspace{0.1cm}
+\hspace{1cm} - IaaS (Infrastructure as a service) access, which is needed to setup LVM architecture.\\
+\vspace{0.1cm}
+\hspace{0.5cm}\textcolor{kugreen}{Disadvantages:}\\
+\vspace{0.1cm}
+\hspace{1cm} - AWS costs.\\
 }
 
-\section{Concluzii}
+\section{Use Cases}
+\frame{
+\frametitle{Use Cases}
+\begin{itemize}
+\item The worst has happened, \textcolor{kugreen}{databased crushed/stopped} and after restarting it has \textcolor{kugreen}{inconsistent data}. The tool build can be used from its web interface to \textcolor{kugreen}{restore} the database to a consistent state at a \textcolor{kugreen}{specified time};
+\vspace{0.1cm}
+\item A tester wants to run a suite of test cases which will\\\textcolor{kugreen}{alter the data} in some way. It realises that what he did was wrong and he wants to \textcolor{kugreen}{restore} the database in the\\\textcolor{kugreen}{exact state} it was \textcolor{kugreen}{at a specified time}.\\He has \textcolor{kugreen}{no knowledge} of SQL or Unix. 
+\end{itemize}
+}
+
+\section{Future dev}
+\frame{
+\frametitle{Future development directions}
+\begin{itemize}
+\item study different databases also\\(right now works only with PostgreSQL);
+\vspace{0.1cm}
+\item offer an abstraction layer over different databases;
+\vspace{0.1cm}
+\item improve web design, refactor Angular components and also HTML and CSS
+\end{itemize}
+}
+
+\section{Conclusions}
 
 \frame{
-\frametitle{Concluzii}
+\frametitle{Conclusions}
 \begin{itemize}
-\item Utilitar ce încarcă în memorie și rulează protocoale de securitate descrise în fișiere de specificație;
-\item Ofera mijloacele necesare pentru verificarea \textbf{integrității} și a \textbf{confidențialității};
-\item Verifică dacă, la nivel teoretic, proprietățile sunt asigurate de către un protocol;
+\item \textcolor{kugreen}{studied} and understood the way PostgreSQL manages database changes;
+\item \textcolor{kugreen}{studied} and understood how to use LVM to combine database point in time recovery with "flexible" UNIX partitions to minimize downtime of the database;
+\item \textcolor{kugreen}{build} an app which facilitates restoring of PostgreSQL databases at a given time, and management (start/ stop/ status queries);
+\item \textcolor{kugreen}{deployed and tested} the created solution on a\\similar \textcolor{kugreen}{production} cloud \textcolor{kugreen}{Amazon Web Services} (AWS) environment.
 \end{itemize}
+}
+
+\section{Bibliography}
+\frame{
+\frametitle{Bibliography}
+\begin{thebibliography}{7}
+\footnotesize
+
+\bibitem{RHEL}
+\newblock Sander van Vugt,
+\newblock Red Hat® RHCSA™/RHCE® 7 Cert Guide: Red Hat Enterprise Linux 7 (EX200 and EX300)
+
+\bibitem{PITR}
+\newblock Postgres Documentation
+\newblock https://www.postgresql.org/docs/9.5/static/continuous-archiving.html
+
+\bibitem{GOF}
+\newblock E.~Gamma, R.~Helm, R.~Johnson, and J.~Vlissides.
+\newblock Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley, 2005.
+
+\bibitem{SPRING}
+\newblock {Craig Walls},
+\newblock Spring in Action, Third Edition
+
+\end{thebibliography}
 }
 
 \end{document}
